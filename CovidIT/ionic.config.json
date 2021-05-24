@@ -1,0 +1,7 @@
+{
+  "name": "CovidIT",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
