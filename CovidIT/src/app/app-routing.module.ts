@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'italy',
+    redirectTo: 'faq',
     pathMatch: 'full'
   },
   {
@@ -15,6 +15,19 @@ const routes: Routes = [
     path: 'region',
     loadChildren: () => import('./pages/region/region.module').then( m => m.RegionPageModule)
   },
+  {
+    path: 'contacts',
+    loadChildren: () => import('./pages/contacts/contacts.module').then(m => m.ContactsPageModule)
+  },
+  {
+    path: 'faq',
+    loadChildren: () => import('./pages/faq/faq.module').then( m => m.FaqPageModule)
+  },
+
+
+
+
+
 ];
 
 @NgModule({

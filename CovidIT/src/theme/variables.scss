@@ -68,13 +68,13 @@
   --ion-color-light-shade: #a2a5af;
   --ion-color-light-tint: #bfc3cd;
 
-
-
+  --ion-background-color: #FFFFFF;
+  --ion-font-family: "Nunito Sans";
 }
 
 :rootDefault {
   /** primary **/
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: ##F1B739;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -154,7 +154,7 @@
    */
 
   body {
-    --ion-color-primary: #428cff;
+    --ion-color-primary: ##F1B739;
     --ion-color-primary-rgb: 66,140,255;
     --ion-color-primary-contrast: #ffffff;
     --ion-color-primary-contrast-rgb: 255,255,255;
