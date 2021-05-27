@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.page.html',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactsPage implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {
+  constructor() { }
+  ngOnInit() {}
+  chiama(numeroString: string){
+    window.open(`tel:${numeroString}`, '_system');
   }
 
 }
