@@ -15,4 +15,13 @@
 
 svg path{
     fill: #9DA3B3;
+
+}
+
+.titolo{
+    color: #FFF;
+}
+
+.mapdiv{
+    transform: scale(0.95)
 }
