@@ -5,8 +5,7 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    version="1.0"
-   width="7200"
-   height="5600"
+   viewBox="0 0 7200 5600"
    id="svg2"
    style="display:inline">
   <defs

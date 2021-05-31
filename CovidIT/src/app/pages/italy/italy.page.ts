@@ -34,7 +34,7 @@ export class ItalyPage implements OnInit {
     else if (nomeRegione=="Emilia-Romagna"){
       s = "../assets/svg/regions/emiliaRomagna.svg";
     }
-    else if (nomeRegione=="Friuli-Venezia_Giulia"){
+    else if (nomeRegione=="Friuli-Venezia Giulia"){
       s = "../assets/svg/regions/friuliVeneziaGiulia.svg";
     }
     else if (nomeRegione=="Lazio"){
