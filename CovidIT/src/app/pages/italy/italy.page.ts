@@ -6,7 +6,7 @@ import { PopovermenuPage} from '../popovermenu/popovermenu.page';
 @Component({
   selector: 'app-italy',
   templateUrl: './italy.page.html',
-  styleUrls: ['./italy.page.css'],
+  styleUrls: ['./italy.page.scss'],
 })
 export class ItalyPage implements OnInit {
 
@@ -84,8 +84,6 @@ export class ItalyPage implements OnInit {
    }
    
   ngOnInit() {
-    //const sardinia = document.getElementById("sardinia");
-    //sardinia.addEventListener("click", this.prova);
   }
 
 }

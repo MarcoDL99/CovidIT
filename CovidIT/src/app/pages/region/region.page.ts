@@ -14,16 +14,13 @@ export class RegionPage implements OnInit {
   region: any;
   paths: any;
 
-  goToProvince(){
-    console.log("funziona");
-  }
+  
 
   bindClick(){
     let obj: any = document.getElementById("mapReg");
     let svgDoc = obj.contentDocument;
     this.paths = svgDoc.getElementsByTagName("path");
-    console.log(this.paths.length);
-    console.log("SI");
+    
     for (let i = 0; i < this.paths.length; i++) {
       this.paths[i].addEventListener("click",this.goToProvince);
     }
@@ -34,6 +31,10 @@ export class RegionPage implements OnInit {
      
   }
 
+  goToProvince(){
+    this.router.navigate(['/province']);
+  }
+  
   createMenu(event: Event){
     this.popover.create({event,component: PopovermenuPage, showBackdrop:false}).then((popoverElement)=>{popoverElement.present();});
   }
