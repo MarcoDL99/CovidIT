@@ -1,14 +1,15 @@
+
 <ion-header>
-  <ion-toolbar mode="ios"  color="primary">
+  <ion-toolbar class="background-color-primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="white" ><h1>CovidIT</h1></ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="createMenu($event)">
         <ion-icon slot="icon-only" ios="ellipsis-vertical" md="ellipsis-vertical"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    <ion-title color ="white" ><h1>CovidIT</h1></ion-title>
   </ion-toolbar>
 </ion-header>
 
