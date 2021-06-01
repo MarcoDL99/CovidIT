@@ -25,14 +25,20 @@ export class RegionPage implements OnInit {
       this.paths[i].addEventListener("click",this.goToProvince);
     }
   }
-
+/*
+  setColorGrey(){
+    for (let i = 0; i < this.paths.length; i++) {
+      this.paths[i].setAttribute("fill","#9DA3B3");
+    }
+  }
+*/
   constructor(private sanitizer: DomSanitizer, private popover: PopoverController, private router: Router, private route: ActivatedRoute) {
     
      
   }
 
-  goToProvince(){
-    this.router.navigate(['/province']);
+  goToProvince(this: HTMLElement){
+    console.log(this);
   }
   
   createMenu(event: Event){
@@ -47,6 +53,7 @@ export class RegionPage implements OnInit {
         this.region = this.getSafeUrl(this.router.getCurrentNavigation().extras.state.regionSVG);
       }
      });
+     
     
   }
 
