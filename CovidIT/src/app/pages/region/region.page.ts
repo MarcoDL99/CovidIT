@@ -22,25 +22,26 @@ export class RegionPage implements OnInit {
     this.paths = svgDoc.getElementsByTagName("path");
     
     for (let i = 0; i < this.paths.length; i++) {
-      this.paths[i].addEventListener("click",this.goToProvince);
+      this.paths[i].addEventListener("click", () => {
+        this.router.navigate(['/province']);
+      }
+      );
     }
-  }
-/*
-  setColorGrey(){
-    for (let i = 0; i < this.paths.length; i++) {
-      this.paths[i].setAttribute("fill","#9DA3B3");
-    }
-  }
-*/
-  constructor(private sanitizer: DomSanitizer, private popover: PopoverController, private router: Router, private route: ActivatedRoute) {
-    
-     
   }
 
-  goToProvince(this: HTMLElement){
-    console.log(this);
+  constructor(private sanitizer: DomSanitizer,
+              private popover: PopoverController,
+              private router: Router,
+              private route: ActivatedRoute) {
+    
   }
-  
+
+
+
+  goToProvince(){
+  }
+
+
   createMenu(event: Event){
     this.popover.create({event,component: PopovermenuPage, showBackdrop:false}).then((popoverElement)=>{popoverElement.present();});
   }
