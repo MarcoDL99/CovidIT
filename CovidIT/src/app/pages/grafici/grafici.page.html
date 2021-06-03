@@ -1,0 +1,30 @@
+
+<ion-header>
+  <ion-toolbar class="background-color-primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" color="white" ><h1>CovidIT</h1></ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="createMenu($event)">
+        <ion-icon slot="icon-only" ios="ellipsis-vertical" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text class="ion-text-center" ><p>{{sourceType}}</p></ion-text>
+<ion-text class="ion-text-center"><h6>Seleziona l'intervallo temporale:</h6></ion-text>
+  <ion-item>
+    <ion-label>Dal giorno:</ion-label>
+    <ion-datetime cancelText="Esci" doneText="Conferma"  displayFormat="DD/MM/YYYY" min="2020-02-24" [max]="endDate" placeholder="Seleziona"
+                  [(ngModel)]="startDate" (ionChange)="set(startDate,'start')"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Al giorno:</ion-label>
+    <ion-datetime cancelText="Esci" doneText="Conferma"  displayFormat="DD/MM/YYYY" min="2020-02-24" max="2021-12-31" placeholder="Seleziona"
+                  [(ngModel)]="endDate" (ionChange)="set(endDate,'end')"></ion-datetime>
+  </ion-item>
+
+</ion-content>

@@ -5,6 +5,7 @@ import {RegionPage} from './pages/region/region.page';
 import {ContactsPage} from './pages/contacts/contacts.page';
 import {FaqPage} from './pages/faq/faq.page';
 import {ProvincePage} from './pages/province/province.page';
+import {GraficiPage} from './pages/grafici/grafici.page';
 
 const routes: Routes = [
   {
@@ -43,8 +44,14 @@ const routes: Routes = [
   },
   {
     path: 'popovermenu',
-    loadChildren: () => import('./pages/popovermenu/popovermenu.module').then(m => m.PopovermenuPageModule)
+    loadChildren: () => import('./Utilty/popovermenu/popovermenu.module').then(m => m.PopovermenuPageModule)
   },
+  {
+    path: 'grafici',
+    loadChildren: () => import('./pages/grafici/grafici.module').then(m => m.GraficiPageModule),
+    component: GraficiPage
+  },
+
 ];
 
 @NgModule({
