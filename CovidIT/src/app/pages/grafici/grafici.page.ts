@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {PopovermenuPage} from '../../Utilty/popovermenu/popovermenu.page';
 import {PopoverController} from '@ionic/angular';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer} from '@angular/platform-browser';
+import {URL_BASE, URL, URL_FROM_PART, URL_TO_PART} from '../../constants';
 
 @Component({
   selector: 'app-grafici',
@@ -27,6 +28,7 @@ export class GraficiPage implements OnInit {
         console.log(this.sourceType);
       }
     });
+    this.getData();
   }
   createMenu(event: Event){
     this.popover.create({event,component: PopovermenuPage, showBackdrop:false}).then((popoverElement)=>{popoverElement.present();});
@@ -43,7 +45,14 @@ export class GraficiPage implements OnInit {
         break;
     }
   }
-  getSafeUrl(url) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  getData(){
+  let sito: string;
+  if(this.sourceType=='italia'){
+    sito= URL.ITALY_FOR_GRAPHS;
+  }
+  else{
+    sito= URL.REGION_FOR_GRAPHS + this.sourceType;}
+  sito= sito+URL_FROM_PART+this.startDate.substring(0,9)+URL_TO_PART+this.endDate.substring(0,9);
+  console.log(sito);
   }
 }

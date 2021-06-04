@@ -17,7 +17,7 @@ export class ItalyPage implements OnInit {
    }
 
    gotoGrafici(){
-     let NavigationExtras: NavigationExtras = {state: {sourceData: 'Italy'}};
+     let NavigationExtras: NavigationExtras = {state: {sourceData: 'italia'}};
      this.router.navigate(['/grafici'], NavigationExtras);
    }
    goToRegion(event: Event){
@@ -83,7 +83,7 @@ export class ItalyPage implements OnInit {
     else if (nomeRegione=="Veneto"){
       s = 'veneto';
     }
-    let NavigationExtras: NavigationExtras = {state: {regionSVG: s}};
+    let NavigationExtras: NavigationExtras = {state: {regionSVG: s, nomeReg: nomeRegione}};
     this.router.navigate(['/region'], NavigationExtras);
    }
 

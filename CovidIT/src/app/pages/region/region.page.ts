@@ -13,6 +13,7 @@ export class RegionPage implements OnInit {
 
   region: any;
   paths: any;
+  nomeregione: any;
 
 
 
@@ -41,7 +42,7 @@ export class RegionPage implements OnInit {
   goToProvince(){
   }
   gotoGrafici(){
-    let NavigationExtras: NavigationExtras = {state: {sourceData: }};
+    let NavigationExtras: NavigationExtras = {state: {sourceData: this.nomeregione}};
     this.router.navigate(['/grafici'], NavigationExtras);
   }
 
@@ -55,10 +56,9 @@ export class RegionPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.region = this.getSafeUrl(this.router.getCurrentNavigation().extras.state.regionSVG);
+        this.nomeregione = this.router.getCurrentNavigation().extras.state.nomeReg;
       }
      });
-
-
   }
 
   ionViewDidEnter(){
@@ -67,7 +67,7 @@ export class RegionPage implements OnInit {
 
 
   getSafeUrl(url) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url)
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
 
 
