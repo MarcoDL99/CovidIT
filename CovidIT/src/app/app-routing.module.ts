@@ -39,10 +39,6 @@ const routes: Routes = [
     component: ProvincePage
   },
   {
-    path: 'splash-screen',
-    loadChildren: () => import('./pages/splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
-  },
-  {
     path: 'popovermenu',
     loadChildren: () => import('./Utilty/popovermenu/popovermenu.module').then(m => m.PopovermenuPageModule)
   },
