@@ -3,6 +3,9 @@ import {PopoverController} from '@ionic/angular';
 import {Router, ActivatedRoute, NavigationExtras} from '@angular/router';
 import {PopovermenuPage} from '../../Utilty/popovermenu/popovermenu.page';
 import { DomSanitizer } from '@angular/platform-browser';
+import { RegionService } from 'src/app/services/region.service';
+import { TerritorioService } from 'src/app/services/territorio.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-region',
@@ -11,10 +14,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class RegionPage implements OnInit {
 
-  region: any;
+  regionSVGURL: any;
   paths: any;
   public static r: Router;
   nomeregione: any;
+  private data$: Observable<number[]>;
 
 
 
@@ -22,14 +26,6 @@ export class RegionPage implements OnInit {
     let obj: any = document.getElementById("mapReg");
     let svgDoc = obj.contentDocument;
     this.paths = svgDoc.getElementsByTagName("path");
-    /*
-    for (let i = 0; i < this.paths.length; i++) {
-      this.paths[i].addEventListener("click", () => {
-        this.router.navigate(['/province']);
-      }
-      );
-    }*/
-
     
     for (let i = 0; i < this.paths.length; i++) {
       this.paths[i].addEventListener("click", function(){
@@ -39,10 +35,14 @@ export class RegionPage implements OnInit {
     }
   }
 
+
   constructor(private sanitizer: DomSanitizer,
               private popover: PopoverController,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private regionService: RegionService,
+              private territorioService: TerritorioService,
+              private nome: String) {
                 RegionPage.r = this.router;
     
   }
@@ -65,14 +65,16 @@ export class RegionPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
-        this.region = this.getSafeUrl(this.router.getCurrentNavigation().extras.state.regionSVG);
+        this.regionSVGURL = this.getSafeUrl(this.router.getCurrentNavigation().extras.state.regionSVG);
         this.nomeregione = this.router.getCurrentNavigation().extras.state.nomeReg;
       }
      });
+     this.nome = this.regionService.getNomeRegione(this.nomeregione);
+     this.data$ = this.territorioService.loadDatiOdierni(this.nome);
   }
 
   ionViewDidEnter(){
-    this.bindClick(this.region);
+    this.bindClick(this.regionSVGURL);
   }
 
 

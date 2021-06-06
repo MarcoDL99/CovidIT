@@ -11,6 +11,30 @@ export class RegioniModel implements TerritorioModel{
   province: string[];
 }
 
+export const REGIONI = {
+  ABRUZZO: 'Abruzzo',
+  BASILICATA: 'Basilicata',
+  CALABRIA: 'Calabria',
+  CAMPANIA: 'Campania',
+  EMILIA_ROMAGNA: 'Emilia Romagna',
+  FRIULI_VENEZIA_GIULIA: 'Friuli Venezia Giulia',
+  LAZIO: 'Lazio',
+  LIGURIA: 'Liguria',
+  LOMBARDIA: 'Lombardia',
+  MARCHE: 'Marche',
+  MOLISE: 'Molise',
+  PIEMONTE: 'Piemonte',
+  PUGLIA: 'Puglia',
+  SARDEGNA: 'Sardegna',
+  SICILIA: 'Sicilia',
+  TOSCANA: 'Toscana',
+  PROVAUT_TRENTO: 'Provincia Autonoma di Trento',
+  PROVAUT_BOLZANO: 'Provincia Autonoma di Bolzano',
+  UMBRIA: 'Umbria',
+  VALLE_D_AOSTA: 'Valle d\'Aosta',
+  VENETO: 'Veneto',
+}
+
 export const ABRUZZO = 'Abruzzo';
 export const BASILICATA = 'Basilicata';
 export const CALABRIA = 'Calabria';
