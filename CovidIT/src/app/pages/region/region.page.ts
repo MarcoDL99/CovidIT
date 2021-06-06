@@ -26,7 +26,7 @@ export class RegionPage implements OnInit {
     let obj: any = document.getElementById("mapReg");
     let svgDoc = obj.contentDocument;
     this.paths = svgDoc.getElementsByTagName("path");
-    
+
     for (let i = 0; i < this.paths.length; i++) {
       this.paths[i].addEventListener("click", function(){
         let provinceSelectedId = this.getAttribute("id");
@@ -44,7 +44,7 @@ export class RegionPage implements OnInit {
               private territorioService: TerritorioService,
               private nome: String) {
                 RegionPage.r = this.router;
-    
+
   }
 
 
@@ -70,7 +70,7 @@ export class RegionPage implements OnInit {
       }
      });
      this.nome = this.regionService.getNomeRegione(this.nomeregione);
-     this.data$ = this.territorioService.loadDatiOdierni(this.nome);
+     //this.data$ = this.territorioService.loadDatiOdierni(this.nome);
   }
 
   ionViewDidEnter(){

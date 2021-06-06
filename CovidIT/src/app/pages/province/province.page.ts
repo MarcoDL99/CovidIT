@@ -34,7 +34,6 @@ export class ProvincePage implements OnInit {
       }
      });
   }
-
   
   ionViewDidEnter(){
     let obj: any = document.getElementById("mapRegProvince");

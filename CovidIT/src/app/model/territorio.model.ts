@@ -1,4 +1,4 @@
-interface TerritorioModel{
+interface Territorio{
   totPositivi: number;
   nuoviPositivi: number;
   totTerapieIntensive: number;

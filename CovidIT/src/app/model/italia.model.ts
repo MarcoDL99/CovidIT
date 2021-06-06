@@ -1,6 +1,6 @@
-import {NOMI_REGIONI} from './regioni.model';
+import {NOMI_REGIONI} from './regione.model';
 
-export class ItaliaModel implements TerritorioModel{
+export class Italia implements Territorio{
   nuoviDecessi: number;
   nuoviPositivi: number;
   nuoviTamponi: number;

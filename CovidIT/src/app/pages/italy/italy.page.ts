@@ -39,7 +39,7 @@ export class ItalyPage implements OnInit {
    }
 
   ngOnInit() {
-    this.data$ = this.territorioService.loadDatiOdierni(ITALIA);
+   // this.data$ = this.territorioService.loadDatiOdierni(ITALIA);
   }
 
 }

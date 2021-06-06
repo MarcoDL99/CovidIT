@@ -21,11 +21,11 @@ export class TerritorioService{
     */
 
     //Carica i dati odierni del territorio selezionato, che può essere italia o regione.
+  /*
     loadDatiOdierni(territorio: String): Observable<number[]>{
         return this.http.get<number[]>(URL.TERRITORIO + "/" + territorio);
+
     }
 
-    
-
-
+   */
 }

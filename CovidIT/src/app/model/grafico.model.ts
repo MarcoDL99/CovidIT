@@ -1,7 +1,8 @@
-export class GraficoModel{
+export class Grafico{
   private dataInizio: Date;
   private dataFine: Date;
   private nome: string;
+
 }
 export const NOME_POSITIVI = 'Positivi';
 export const NOME_TERAPIE_INTENSIVE= 'Terapie Intensive';
