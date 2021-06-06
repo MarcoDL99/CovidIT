@@ -1,4 +1,3 @@
-
 export class Regione{
   totPositivi: number;
   nuoviPositivi: number;
@@ -10,6 +9,7 @@ export class Regione{
   nuoviTamponi: number;
   nome: string;
   province: string[];
+  ultimoAggiornamento: string;
 }
 
 export const REGIONI = {

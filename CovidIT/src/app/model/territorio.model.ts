@@ -1,4 +1,5 @@
-interface Territorio{
+
+export interface Territorio{
   totPositivi: number;
   nuoviPositivi: number;
   totTerapieIntensive: number;
@@ -7,5 +8,6 @@ interface Territorio{
   nuoviDecessi: number;
   totTamponi: number;
   nuoviTamponi: number;
+  ultimoAggiornamento: string;
 
 }
