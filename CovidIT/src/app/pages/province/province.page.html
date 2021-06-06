@@ -16,11 +16,11 @@
 <ion-content>
 
   <div class="mapdiv">
-
+    <object class="mappaSVG" id="mapRegProvince" type="image/svg+xml" [attr.data]="region"></object>
   </div>
 
 
-  <ion-button shape="round" color="secondary" expand="block" class="ion-text-center">
+  <ion-button (click)="tasto()" shape="round" color="secondary" expand="block" class="ion-text-center">
     <ion-text class="ion-text-center">
       <p class="text_grafici">Vai ai grafici</p>
     </ion-text>

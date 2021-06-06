@@ -13,19 +13,28 @@ export class RegionPage implements OnInit {
 
   region: any;
   paths: any;
+  public static r: Router;
 
   
 
-  bindClick(){
+  bindClick(region){
     let obj: any = document.getElementById("mapReg");
     let svgDoc = obj.contentDocument;
     this.paths = svgDoc.getElementsByTagName("path");
-    
+    /*
     for (let i = 0; i < this.paths.length; i++) {
       this.paths[i].addEventListener("click", () => {
         this.router.navigate(['/province']);
       }
       );
+    }*/
+
+    
+    for (let i = 0; i < this.paths.length; i++) {
+      this.paths[i].addEventListener("click", function(){
+        let provinceSelectedId = this.getAttribute("id");
+        prova(provinceSelectedId, region);
+      });
     }
   }
 
@@ -33,12 +42,13 @@ export class RegionPage implements OnInit {
               private popover: PopoverController,
               private router: Router,
               private route: ActivatedRoute) {
+                RegionPage.r = this.router;
     
   }
 
 
-
   goToProvince(){
+    console.log(this);
   }
 
 
@@ -52,6 +62,7 @@ export class RegionPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.region = this.getSafeUrl(this.router.getCurrentNavigation().extras.state.regionSVG);
+        
       }
      });
      
@@ -59,7 +70,7 @@ export class RegionPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.bindClick();
+    this.bindClick(this.region);
   }
 
 
@@ -69,3 +80,8 @@ export class RegionPage implements OnInit {
 
   
 }
+
+function prova(id: String, region){
+  let NavigationExtras: NavigationExtras = {state: {regionSVG: region, idProvince: id}};
+    RegionPage.r.navigate(['/province'], NavigationExtras);
+};
