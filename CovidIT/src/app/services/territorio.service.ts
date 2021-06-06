@@ -1,7 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {URL} from '../constants';
-import { TerritorioModel } from "../model/territorio.model";
+import { Territorio } from "../model/territorio.model";
 import { Injectable } from '@angular/core';
 
 

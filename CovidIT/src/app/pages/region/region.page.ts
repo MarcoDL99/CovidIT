@@ -83,7 +83,7 @@ export class RegionPage implements OnInit {
      //this.data$ = this.territorioService.loadDatiOdierni(this.nome);
 
      //PER PROVA
-     this.data$ = new RegioniModel();
+     this.data$ = new Regione();
      this.data$.nuoviPositivi = 4;
      this.data$.totPositivi = 2;
       this.data$.nuoviDecessi = 9;
