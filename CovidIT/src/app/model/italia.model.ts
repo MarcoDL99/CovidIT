@@ -1,4 +1,5 @@
 import {NOMI_REGIONI} from './regioni.model';
+import { TerritorioModel } from './territorio.model';
 
 export class ItaliaModel implements TerritorioModel{
   nuoviDecessi: number;
@@ -10,4 +11,5 @@ export class ItaliaModel implements TerritorioModel{
   totTamponi: number;
   totTerapieIntensive: number;
   regioni: string[] = NOMI_REGIONI;
+  ultimoAggiornamento: string;
 }

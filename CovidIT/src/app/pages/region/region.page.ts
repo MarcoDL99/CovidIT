@@ -6,6 +6,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { RegionService } from 'src/app/services/region.service';
 import { TerritorioService } from 'src/app/services/territorio.service';
 import { Observable } from 'rxjs';
+import { TerritorioModel } from 'src/app/model/territorio.model';
+import { RegioniModel } from 'src/app/model/regioni.model';
 
 @Component({
   selector: 'app-region',
@@ -18,7 +20,13 @@ export class RegionPage implements OnInit {
   paths: any;
   public static r: Router;
   nomeregione: any;
-  private data$: Observable<number[]>;
+  //DA SCOMMENTARE
+  //private data$: Observable<TerritorioModel[]>;
+
+  //PER PROVARE
+  private data$: TerritorioModel;
+
+  private nome: String
 
 
 
@@ -42,9 +50,8 @@ export class RegionPage implements OnInit {
               private route: ActivatedRoute,
               private regionService: RegionService,
               private territorioService: TerritorioService,
-              private nome: String) {
+              ) {
                 RegionPage.r = this.router;
-    
   }
 
 
@@ -70,7 +77,20 @@ export class RegionPage implements OnInit {
       }
      });
      this.nome = this.regionService.getNomeRegione(this.nomeregione);
-     this.data$ = this.territorioService.loadDatiOdierni(this.nome);
+
+    //DA SCOMMENTARE!!!!
+     //this.data$ = this.territorioService.loadDatiOdierni(this.nome);
+
+     //PER PROVA
+     this.data$ = new RegioniModel();
+     this.data$.nuoviPositivi = 4;
+     this.data$.totPositivi = 2;
+      this.data$.nuoviDecessi = 9;
+     this.data$.totDecessi = 10;
+      this.data$.nuoviTamponi = 4;
+     this.data$.totTamponi = 99;
+     this.data$.nuoviTerapieIntensive = 1;
+     this.data$.totTerapieIntensive = 111;
   }
 
   ionViewDidEnter(){

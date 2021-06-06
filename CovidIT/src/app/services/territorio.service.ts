@@ -1,8 +1,15 @@
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {URL} from '../constants';
+import { TerritorioModel } from "../model/territorio.model";
+import { Injectable } from '@angular/core';
 
 
+
+
+@Injectable({
+  providedIn: 'root'
+})
 export class TerritorioService{
 
 
@@ -21,8 +28,8 @@ export class TerritorioService{
     */
 
     //Carica i dati odierni del territorio selezionato, che può essere italia o regione.
-    loadDatiOdierni(territorio: String): Observable<number[]>{
-        return this.http.get<number[]>(URL.TERRITORIO + "/" + territorio);
+    loadDatiOdierni(territorio: String): Observable<TerritorioModel[]>{
+        return this.http.get<TerritorioModel[]>(URL.TERRITORIO + "/" + territorio);
     }
 
     

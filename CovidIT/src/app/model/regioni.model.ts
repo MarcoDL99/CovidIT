@@ -1,3 +1,6 @@
+import { TerritorioModel } from "./territorio.model";
+
+
 export class RegioniModel implements TerritorioModel{
   nuoviDecessi: number;
   nuoviPositivi: number;
@@ -9,6 +12,7 @@ export class RegioniModel implements TerritorioModel{
   totTerapieIntensive: number;
   nome: string;
   province: string[];
+  ultimoAggiornamento: string;
 }
 
 export const REGIONI = {

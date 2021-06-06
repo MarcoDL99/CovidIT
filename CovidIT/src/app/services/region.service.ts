@@ -1,5 +1,10 @@
 import { REGIONI } from "../model/regioni.model";
+import { Injectable } from '@angular/core';
 
+
+@Injectable({
+  providedIn: 'root'
+})
 export class RegionService{
 
     constructor(){}

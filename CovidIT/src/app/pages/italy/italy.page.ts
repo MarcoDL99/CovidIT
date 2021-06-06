@@ -6,6 +6,8 @@ import { TerritorioService } from 'src/app/services/territorio.service';
 import { Observable } from 'rxjs';
 import { ITALIA } from 'src/app/constants';
 import { ItaliaService } from 'src/app/services/italia.service';
+import { TerritorioModel } from 'src/app/model/territorio.model';
+import { ItaliaModel } from 'src/app/model/italia.model';
 
 @Component({
   selector: 'app-italy',
@@ -14,11 +16,15 @@ import { ItaliaService } from 'src/app/services/italia.service';
 })
 export class ItalyPage implements OnInit {
 
-  private data$: Observable<number[]>;
+  //QUESTO E' DA SCOMMENTARE!!!!!!!!!!!!!!!
+  //private data$: Observable<TerritorioModel[]>;
+
+  //SOLO PER PROVARE!!!!!!!!!!!!!!!!!!
+  private data$: TerritorioModel;
 
   constructor(private popover: PopoverController,
               private router: Router,
-              private territorioService: TerritorioService,
+              //private territorioService: TerritorioService,
               private italiaService: ItaliaService) {
   }
    createMenu(event: Event){
@@ -39,7 +45,20 @@ export class ItalyPage implements OnInit {
    }
 
   ngOnInit() {
-    this.data$ = this.territorioService.loadDatiOdierni(ITALIA);
+    //QUesto è da scommentare!!!!!!!!!!!!!
+    //this.data$ = this.territorioService.loadDatiOdierni(ITALIA);
+
+    //SOLO PER PROVARE, DA CANCELLARE!!!
+    this.data$ = new ItaliaModel();
+    this.data$.nuoviPositivi = 4;
+    this.data$.totPositivi = 2;
+    this.data$.nuoviDecessi = 9;
+    this.data$.totDecessi = 10;
+    this.data$.nuoviTamponi = 4;
+    this.data$.totTamponi = 99;
+    this.data$.nuoviTerapieIntensive = 1;
+    this.data$.totTerapieIntensive = 111;
+
   }
 
 }
