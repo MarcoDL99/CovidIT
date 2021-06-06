@@ -1,78 +1,29 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
+    <ion-buttons class="titolo"slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title mode="ios"><h1>CovidIT</h1></ion-title>
+    <ion-title mode="ios" class="titolo"><h1>CovidIT</h1></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen="true">
-  <ion-list mode="ios" lines="none">
-      <ion-item-divider color="dark" >
+<ion-content >
+  <ion-list  mode="ios" lines="none">
+    <ion-item *ngFor="let faq of faqs$ | async"
+              class="ion-no-padding" style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;"  >
+      <span>
+        <ion-item-divider color="dark" >
         <ion-text>
-          <h3>Chi siamo</h3>
+          <h3>{{faq.domanda}}</h3>
         </ion-text>
       </ion-item-divider>
-
-    <ion-item color="secondary">
+        <ion-item color="secondary">
       <ion-text>
-        <p>Ciao, siamo Marco e Lorenzo, due studenti dell'Università degli Studi de L'Aquila.<br>
-          Abbiamo realizzato quest'app per fornire un mezzo semplice e rapido per reperire i dati relativi al Covid.</p>
+        <p>{{faq.risposta}}</p>
       </ion-text>
     </ion-item>
-
-    <ion-item-divider color="dark" >
-      <ion-text>
-        <h3>Posso fidarmi dei dati che mostrate?</h3>
-      </ion-text>
-    </ion-item-divider>
-
-    <ion-item color="secondary">
-      <ion-text >
-        <p >Certo! I dati vengono presi da una fonte affidabile messa a disposizione dal Dipartimento della Protezione Civile. Noi ci limitiamo a prelevarli e mostrarli.</p>
-      </ion-text>
-
+      </span>
     </ion-item>
-
-    <ion-item-divider color="dark" >
-      <ion-text>
-        <h3>Perché non riesco a visualizzare i dati di oggi? </h3>
-      </ion-text>
-  </ion-item-divider>
-
-    <ion-item color="secondary">
-      <ion-text >
-        <p >L'app preleva i dati inviati dalla Protezione Civile intorno alle 18:30 di ogni giorno, ma potrebbero sempre esserci dei ritardi e
-          quindi può darsi che non siano ancora stati pubblicati. Ti conviene ricontrollare più tardi!</p>
-      </ion-text>
-    </ion-item>
-
-    <ion-item-divider color="dark" >
-      <ion-text>
-        <h3>Perché a livello provinciale vedo solo i contagi e non riesco a visualizzare altri dati?</h3>
-      </ion-text>
-    </ion-item-divider>
-
-    <ion-item color="secondary">
-      <ion-text >
-        <p >Purtroppo la nostra fonte non ci mette a disposizione altri dati a livello provinciale. </p>
-      </ion-text>
-    </ion-item>
-
-    <ion-item-divider color="dark" >
-      <ion-text>
-        <h3>Perché tra i grafici non posso visualizzare dati precedenti al 24/2/2020?</h3>
-      </ion-text>
-    </ion-item-divider>
-
-    <ion-item color="secondary">
-      <ion-text >
-        <p >Non sono stati raccolti dati prima di quella data.</p>
-      </ion-text>
-    </ion-item>
-
-
   </ion-list>
 
 </ion-content>

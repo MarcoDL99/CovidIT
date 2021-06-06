@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { PopoverController} from '@ionic/angular';
-import { PopovermenuPage} from '../popovermenu/popovermenu.page';
+import { PopovermenuPage} from '../../Utilty/popovermenu/popovermenu.page';
 
 @Component({
   selector: 'app-italy',
@@ -16,6 +16,10 @@ export class ItalyPage implements OnInit {
     this.popover.create({event,component: PopovermenuPage, showBackdrop:false}).then((popoverElement)=>{popoverElement.present();});
    }
 
+   gotoGrafici(){
+     let NavigationExtras: NavigationExtras = {state: {sourceData: 'italia'}};
+     this.router.navigate(['/grafici'], NavigationExtras);
+   }
    goToRegion(event: Event){
     let s: any;
     let nomeRegione = (<HTMLInputElement> event.target).getAttribute('title');
@@ -77,15 +81,15 @@ export class ItalyPage implements OnInit {
       s = "../assets/svg/regions/valleDAosta.svg";
     }
     else if (nomeRegione=="Veneto"){
-      s = "../assets/svg/regions/veneto.svg";
+      s = 'veneto';
     }
-    let NavigationExtras: NavigationExtras = {state: {regionSVG: s}};
+    let NavigationExtras: NavigationExtras = {state: {regionSVG: s, nomeReg: nomeRegione}};
     this.router.navigate(['/region'], NavigationExtras);
    }
-   
+
   ngOnInit() {
   }
 
 }
-  
+
 

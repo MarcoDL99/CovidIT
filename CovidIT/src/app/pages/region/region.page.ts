@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PopoverController} from '@ionic/angular';
 import {Router, ActivatedRoute, NavigationExtras} from '@angular/router';
-import {PopovermenuPage} from '../popovermenu/popovermenu.page';
+import {PopovermenuPage} from '../../Utilty/popovermenu/popovermenu.page';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -14,8 +14,9 @@ export class RegionPage implements OnInit {
   region: any;
   paths: any;
   public static r: Router;
+  nomeregione: any;
 
-  
+
 
   bindClick(region){
     let obj: any = document.getElementById("mapReg");
@@ -50,7 +51,10 @@ export class RegionPage implements OnInit {
   goToProvince(){
     console.log(this);
   }
-
+  gotoGrafici(){
+    let NavigationExtras: NavigationExtras = {state: {sourceData: this.nomeregione}};
+    this.router.navigate(['/grafici'], NavigationExtras);
+  }
 
   createMenu(event: Event){
     this.popover.create({event,component: PopovermenuPage, showBackdrop:false}).then((popoverElement)=>{popoverElement.present();});
@@ -62,11 +66,9 @@ export class RegionPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.region = this.getSafeUrl(this.router.getCurrentNavigation().extras.state.regionSVG);
-        
+        this.nomeregione = this.router.getCurrentNavigation().extras.state.nomeReg;
       }
      });
-     
-    
   }
 
   ionViewDidEnter(){
@@ -75,10 +77,10 @@ export class RegionPage implements OnInit {
 
 
   getSafeUrl(url) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url)
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
 
-  
+
 }
 
 function prova(id: String, region){

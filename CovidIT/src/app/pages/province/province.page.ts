@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {PopoverController} from '@ionic/angular';
+
 import {Router, ActivatedRoute, NavigationExtras} from '@angular/router';
-import {PopovermenuPage} from '../popovermenu/popovermenu.page';
+import {PopovermenuPage} from '../../Utilty/popovermenu/popovermenu.page';
 
 @Component({
   selector: 'app-province',

@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar class="background-color-primary">
-    <ion-buttons slot="start">
+  <ion-toolbar color="primary">
+    <ion-buttons class="titolo" slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title mode="ios" color="white" ><h1>CovidIT</h1></ion-title>
+    <ion-title class="titolo" mode="ios" ><h1>CovidIT</h1></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -22,8 +22,8 @@
         <h3>800 595 459</h3>
       </ion-label>
 
-      <ion-button class="background-primary">
-        <ion-icon slot="icon-only" (click)="chiama('800 595 459')" src="assets/svg/phone.svg" size="big"></ion-icon>
+      <ion-button class="background-primary" (click)="chiama('800 595 459')">
+        <ion-icon slot="icon-only"  src="assets/svg/phone.svg" size="big"></ion-icon>
       </ion-button>
 
       </ion-item>
