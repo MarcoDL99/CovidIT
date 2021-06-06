@@ -34,22 +34,16 @@ export class GraficiPage implements OnInit {
     this.chart = {
       chartType: 'LineChart',
       dataTable: [
-        ['Task', 'Hours per Day'],
-        ['27/05/2021', 700],
-        ['28/05/2021', 789],
-        ['29/05/2021', 711],
-        ['30/05/2021', 799],
-        ['31/05/2021', 788],
-        ['01/06/2021', 754],
-        ['02/06/2021', 764],
-        ['03/06/2021', 728],
-        ['04/06/2021', 714],
-        ['05/06/2021', 732],
-        ['06/06/2021', 700]
+        [, 3 ],
+        [, 0],
+        [, 789],
+        [, 711]
       ],
-      //firstRowIsData: true,
-      options: {title: 'Nuovi Casi',
+      firstRowIsData: true,
+      options: {
         legend: 'none',
+        title: '', // Titolo preso dalla proprietà scaricata dal database
+        chartArea: {left:'10%', width: '70%'},
         crosshair: {trigger: 'selection'}, //serve per mostrare i dati quando si seleziona un punto
       },
     };

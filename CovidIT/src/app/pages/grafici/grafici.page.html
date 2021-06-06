@@ -28,9 +28,15 @@
   </ion-item>
 
 
+<ion-list mode="ios" lines="none">
 
-<div class="graph_button">
-      <google-chart [data]="chart"></google-chart>
-</div>
+  <ion-item class="ion-no-padding "
+            style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;" >
+    <google-chart [data]="chart"></google-chart>
+  </ion-item>
+  <ion-item class="ion-no-padding" style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;" >
+    <google-chart [data]="chart"></google-chart>
+  </ion-item>
+</ion-list>
 
 </ion-content>
