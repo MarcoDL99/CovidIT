@@ -18,7 +18,6 @@ export class RegionPage implements OnInit {
 
   regionSVGURL: any;
   paths: any;
-  public static r: Router;
   nomeregione: any;
   //DA SCOMMENTARE
   //private data$: Observable<TerritorioModel[]>;
@@ -27,46 +26,6 @@ export class RegionPage implements OnInit {
   private data$: TerritorioModel;
 
   private nome: String
-
-
-
-  bindClick(region){
-    let obj: any = document.getElementById("mapReg");
-    let svgDoc = obj.contentDocument;
-    this.paths = svgDoc.getElementsByTagName("path");
-    
-    for (let i = 0; i < this.paths.length; i++) {
-      this.paths[i].addEventListener("click", function(){
-        let provinceSelectedId = this.getAttribute("id");
-        prova(provinceSelectedId, region);
-      });
-    }
-  }
-
-
-  constructor(private sanitizer: DomSanitizer,
-              private popover: PopoverController,
-              private router: Router,
-              private route: ActivatedRoute,
-              private regionService: RegionService,
-              private territorioService: TerritorioService,
-              ) {
-                RegionPage.r = this.router;
-  }
-
-
-  goToProvince(){
-    console.log(this);
-  }
-  gotoGrafici(){
-    let NavigationExtras: NavigationExtras = {state: {sourceData: this.nomeregione}};
-    this.router.navigate(['/grafici'], NavigationExtras);
-  }
-
-  createMenu(event: Event){
-    this.popover.create({event,component: PopovermenuPage, showBackdrop:false}).then((popoverElement)=>{popoverElement.present();});
-  }
-
 
 
   ngOnInit() {
@@ -93,19 +52,56 @@ export class RegionPage implements OnInit {
      this.data$.totTerapieIntensive = 111;
   }
 
+
+
+  bindClick(){
+    let obj: any = document.getElementById("mapReg");
+    let svgDoc = obj.contentDocument;
+    this.paths = svgDoc.getElementsByTagName("path");
+
+    //this nella variabile scope per poterla usare all'interno di addEventListener
+    let scope: this;
+    
+    for (let i = 0; i < this.paths.length; i++) {
+      this.paths[i].addEventListener("click", function(){
+        let provinceSelectedId = this.getAttribute("id");
+        let NavigationExtras: NavigationExtras = {state: {regionSVG: scope.regionSVGURL, idProvince: provinceSelectedId}};
+        scope.router.navigate(['/province'], NavigationExtras);
+      });
+    }
+  }
+
+
+  constructor(private sanitizer: DomSanitizer,
+              private popover: PopoverController,
+              private router: Router,
+              private route: ActivatedRoute,
+              private regionService: RegionService,
+              private territorioService: TerritorioService,
+              ) {}
+
+
+  gotoGrafici(){
+    let NavigationExtras: NavigationExtras = {state: {sourceData: this.nomeregione}};
+    this.router.navigate(['/grafici'], NavigationExtras);
+  }
+
+  createMenu(event: Event){
+    this.popover.create({event,component: PopovermenuPage, showBackdrop:false}).then((popoverElement)=>{popoverElement.present();});
+  }
+
+
+
+
+
   ionViewDidEnter(){
-    this.bindClick(this.regionSVGURL);
+    this.bindClick();
   }
 
 
   getSafeUrl(url) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
 }
 
-
-}
-
-function prova(id: String, region){
-  let NavigationExtras: NavigationExtras = {state: {regionSVG: region, idProvince: id}};
-    RegionPage.r.navigate(['/province'], NavigationExtras);
-};

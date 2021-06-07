@@ -58,7 +58,6 @@ export class ItalyPage implements OnInit {
     this.data$.totTamponi = 99;
     this.data$.nuoviTerapieIntensive = 1;
     this.data$.totTerapieIntensive = 111;
-
   }
 
 }

@@ -1,6 +1,8 @@
 export class ProvinciaModel{
   nome: string;
   totaleContagi: number;
+  ultimoAggiornamento: string;
+
 }
 
 export const ABRUZZOAQ = 'L\'Aquila';
