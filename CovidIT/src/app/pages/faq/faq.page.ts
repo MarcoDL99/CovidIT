@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Faq} from '../../model/faq.model';
 import {Observable} from 'rxjs';
-import {FaqService} from "../../services/faq.service";
+import {FaqService} from '../../services/faq.service';
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.page.html',

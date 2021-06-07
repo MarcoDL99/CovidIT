@@ -6,8 +6,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { RegionService } from 'src/app/services/region.service';
 import { TerritorioService } from 'src/app/services/territorio.service';
 import { Observable } from 'rxjs';
-import { TerritorioModel } from 'src/app/model/territorio.model';
-import { RegioniModel } from 'src/app/model/regioni.model';
+import { Territorio } from 'src/app/model/territorio.model';
+import { Regione } from 'src/app/model/regione.model';
 
 @Component({
   selector: 'app-region',
@@ -23,7 +23,7 @@ export class RegionPage implements OnInit {
   //private data$: Observable<TerritorioModel[]>;
 
   //PER PROVARE
-  private data$: TerritorioModel;
+  private data$: Territorio;
 
   private nome: String
 
@@ -41,7 +41,7 @@ export class RegionPage implements OnInit {
      //this.data$ = this.territorioService.loadDatiOdierni(this.nome);
 
      //PER PROVA
-     this.data$ = new RegioniModel();
+     this.data$ = new Regione();
      this.data$.nuoviPositivi = 4;
      this.data$.totPositivi = 2;
       this.data$.nuoviDecessi = 9;
@@ -89,7 +89,6 @@ export class RegionPage implements OnInit {
   createMenu(event: Event){
     this.popover.create({event,component: PopovermenuPage, showBackdrop:false}).then((popoverElement)=>{popoverElement.present();});
   }
-
 
 
 

@@ -1,4 +1,4 @@
-import { REGIONI } from "../model/regioni.model";
+import { REGIONI } from '../model/regione.model';
 import { Injectable } from '@angular/core';
 
 

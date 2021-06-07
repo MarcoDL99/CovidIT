@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {PopoverController} from '@ionic/angular';
-import { TerritorioModel } from 'src/app/model/territorio.model';
+import { Territorio } from 'src/app/model/territorio.model';
 
 import {Router, ActivatedRoute, NavigationExtras} from '@angular/router';
 import {PopovermenuPage} from '../../Utilty/popovermenu/popovermenu.page';
-import { ProvinciaModel } from 'src/app/model/provincia.model';
+import { Provincia } from 'src/app/model/provincia.model';
 import { ProvinciaService } from 'src/app/services/provincia.service';
 import {Observable} from 'rxjs';
 
@@ -17,7 +17,7 @@ export class ProvincePage implements OnInit {
 
   region: any;
   paths: any;
-  private data$: Observable<ProvinciaModel>;
+  private data$: Observable<Provincia>;
   private svgDoc: any;
   provinceId: any;
 
@@ -42,7 +42,6 @@ export class ProvincePage implements OnInit {
       }
      });
   }
-
   
   ionViewDidEnter(){
     let obj: any = document.getElementById("mapRegProvince");

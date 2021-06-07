@@ -3,6 +3,7 @@ import {PopovermenuPage} from '../../Utilty/popovermenu/popovermenu.page';
 import {PopoverController} from '@ionic/angular';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
+import {GoogleChartInterface} from "ng2-google-charts";
 //import {URL_BASE, URL, URL_FROM_PART, URL_TO_PART} from '../../constants';
 
 @Component({
@@ -11,17 +12,18 @@ import {DomSanitizer} from '@angular/platform-browser';
   styleUrls: ['./grafici.page.scss'],
 })
 export class GraficiPage implements OnInit {
+
   private startDate: any;
   private endDate: any;
   private sourceType: any;
-
+  private chart: GoogleChartInterface;
   constructor(private sanitizer: DomSanitizer,
               private popover: PopoverController,
               private router: Router,
               private route: ActivatedRoute) {}
   ngOnInit() {
-    this.startDate='2020-02-24T23:39:03.342+02:00';
-    this.endDate=new Date().toISOString();
+    this.startDate = '2020-02-24T23:39:03.342+02:00';
+    this.endDate = new Date().toISOString();
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.sourceType = this.router.getCurrentNavigation().extras.state.sourceData;
@@ -29,6 +31,22 @@ export class GraficiPage implements OnInit {
       }
     });
     //this.getData();
+    this.chart = {
+      chartType: 'LineChart',
+      dataTable: [
+        [, 3 ],
+        [, 0],
+        [, 789],
+        [, 711]
+      ],
+      firstRowIsData: true,
+      options: {
+        legend: 'none',
+        title: '', // Titolo preso dalla proprietà scaricata dal database
+        chartArea: {left:'10%', width: '70%'},
+        crosshair: {trigger: 'selection'}, //serve per mostrare i dati quando si seleziona un punto
+      },
+    };
   }
   createMenu(event: Event){
     this.popover.create({event,component: PopovermenuPage, showBackdrop:false}).then((popoverElement)=>{popoverElement.present();});
@@ -45,16 +63,5 @@ export class GraficiPage implements OnInit {
         break;
     }
   }
-  /*
-  getData(){
-  let sito: string;
-  if(this.sourceType=='italia'){
-    sito= URL.ITALY_FOR_GRAPHS;
-  }
-  else{
-    sito= URL.REGION_FOR_GRAPHS + this.sourceType;}
-  sito= sito+URL_FROM_PART+this.startDate.substring(0,9)+URL_TO_PART+this.endDate.substring(0,9);
-  console.log(sito);
-  }
-  */
+
 }

@@ -1,4 +1,5 @@
-export interface TerritorioModel{
+
+export interface Territorio{
   totPositivi: number;
   nuoviPositivi: number;
   totTerapieIntensive: number;

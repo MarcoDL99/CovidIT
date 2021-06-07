@@ -6,8 +6,8 @@ import { TerritorioService } from 'src/app/services/territorio.service';
 import { Observable } from 'rxjs';
 import { ITALIA } from 'src/app/constants';
 import { ItaliaService } from 'src/app/services/italia.service';
-import { TerritorioModel } from 'src/app/model/territorio.model';
-import { ItaliaModel } from 'src/app/model/italia.model';
+import { Territorio } from 'src/app/model/territorio.model';
+import { Italia } from 'src/app/model/italia.model';
 
 @Component({
   selector: 'app-italy',
@@ -20,12 +20,13 @@ export class ItalyPage implements OnInit {
   //private data$: Observable<TerritorioModel[]>;
 
   //SOLO PER PROVARE!!!!!!!!!!!!!!!!!!
-  private data$: TerritorioModel;
+  private data$: Territorio;
 
   constructor(private popover: PopoverController,
               private router: Router,
               //private territorioService: TerritorioService,
-              private italiaService: ItaliaService) {
+              private italiaService: ItaliaService
+  ) {
   }
    createMenu(event: Event){
     this.popover.create({event,component: PopovermenuPage, showBackdrop:false}).then((popoverElement)=>{popoverElement.present();});
@@ -41,7 +42,7 @@ export class ItalyPage implements OnInit {
     let nomeRegione = (<HTMLInputElement> event.target).getAttribute('title');
     let regionSVG = this.italiaService.getRegionSVG(nomeRegione);
     let NavigationExtras: NavigationExtras = {state: {regionSVG: regionSVG, nomeReg: nomeRegione}};
-    this.router.navigate(['/region'], NavigationExtras);
+   this.router.navigate(['/region'], NavigationExtras);
    }
 
   ngOnInit() {
@@ -49,7 +50,7 @@ export class ItalyPage implements OnInit {
     //this.data$ = this.territorioService.loadDatiOdierni(ITALIA);
 
     //SOLO PER PROVARE, DA CANCELLARE!!!
-    this.data$ = new ItaliaModel();
+    this.data$ = new Italia();
     this.data$.nuoviPositivi = 4;
     this.data$.totPositivi = 2;
     this.data$.nuoviDecessi = 9;

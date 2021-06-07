@@ -1,15 +1,12 @@
-import { TerritorioModel } from "./territorio.model";
-
-
-export class RegioniModel implements TerritorioModel{
-  nuoviDecessi: number;
+export class Regione{
+  totPositivi: number;
   nuoviPositivi: number;
-  nuoviTamponi: number;
+  totTerapieIntensive: number;
   nuoviTerapieIntensive: number;
   totDecessi: number;
-  totPositivi: number;
+  nuoviDecessi: number;
   totTamponi: number;
-  totTerapieIntensive: number;
+  nuoviTamponi: number;
   nome: string;
   province: string[];
   ultimoAggiornamento: string;
