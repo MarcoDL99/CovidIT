@@ -26,16 +26,14 @@
 
   <ion-text color="dark" class="ion-text-center">
     <p class="text_dati">Dati aggiornati al:</p>
-    <p class="text_dati">../../..</p>
+    <p class="text_dati">{{data$.ultimoAggiornamento}}</p>
   </ion-text>
 
   <div class="data_box ion-text-center ion-margin-bottom ion-margin-start ion-margin-end">
-    <ion-row class="ion-text-center">
-        <ion-text color="dark">
-          <h2>{{data$.contagiTotali}}</h2>
+        <ion-text class="ion-text-center" color="dark">
+          <h2>{{data$.totaleContagi}}</h2>
           <p>Contagi totali</p>
         </ion-text>
-    </ion-row>
   </div>
 
 

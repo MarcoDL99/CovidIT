@@ -10,7 +10,7 @@ import {GraficiPage} from './pages/grafici/grafici.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'region',
+    redirectTo: 'italy',
     pathMatch: 'full'
   },
   {

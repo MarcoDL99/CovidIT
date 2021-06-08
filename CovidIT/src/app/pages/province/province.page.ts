@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import {PopoverController} from '@ionic/angular';
 import { Territorio } from 'src/app/model/territorio.model';
 
@@ -17,7 +17,9 @@ export class ProvincePage implements OnInit {
 
   region: any;
   paths: any;
-  private data$: Observable<Provincia>;
+  //DA SCOMMENTARE
+  //private data$: Observable<Provincia>;
+  private data$: Provincia;
   private svgDoc: any;
   provinceId: any;
 
@@ -25,7 +27,8 @@ export class ProvincePage implements OnInit {
   constructor(private popover: PopoverController,
                private router: Router,
                private route: ActivatedRoute,
-               private provinciaService: ProvinciaService) {
+               private provinciaService: ProvinciaService,
+               private zone: NgZone) {
                 
   }
 
@@ -35,12 +38,21 @@ export class ProvincePage implements OnInit {
 
 
   ngOnInit() {
+
+
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.region = this.router.getCurrentNavigation().extras.state.regionSVG;
         this.provinceId = this.router.getCurrentNavigation().extras.state.idProvince;
       }
      });
+  
+     //PER PROVA, DA TOGLIERE!!!!
+     this.data$ = new Provincia();
+     this.data$.nome="prova"
+     this.data$.totaleContagi=300;
+     this.data$.ultimoAggiornamento="10/10/20";
+
   }
   
   ionViewDidEnter(){
@@ -59,7 +71,9 @@ export class ProvincePage implements OnInit {
     for (let i = 0; i < this.paths.length; i++) {
       this.paths[i].addEventListener("click", function(){
         let provinceSelectedId = this.getAttribute("id");
-        scope.doRefresh(provinceSelectedId);
+        scope.zone.run(()=>{
+          scope.doRefresh(provinceSelectedId);
+        });
       });
     }
   }
@@ -68,8 +82,8 @@ export class ProvincePage implements OnInit {
     this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#9DA3B3");
     this.provinceId = id;
     this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#F1B739");
-    //Carica i contagi a partire dall'id della provincia, ovvero il suo nome
-    this.data$ = this.provinciaService.loadContagi(this.provinceId);
+    //Carica i contagi a partire dall'id della provincia, ovvero il suo nome DA SCOMMENTARE
+    //this.data$ = this.provinciaService.loadContagi(this.provinceId);
   }
 
 }

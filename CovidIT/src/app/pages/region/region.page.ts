@@ -60,7 +60,7 @@ export class RegionPage implements OnInit {
     this.paths = svgDoc.getElementsByTagName("path");
 
     //this nella variabile scope per poterla usare all'interno di addEventListener
-    let scope: this;
+    let scope = this;
     
     for (let i = 0; i < this.paths.length; i++) {
       this.paths[i].addEventListener("click", function(){
