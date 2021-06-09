@@ -25,7 +25,7 @@ export class RegionPage implements OnInit {
   //PER PROVARE
   private data$: Territorio;
 
-  private nome: String
+  private nome: string;
 
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class RegionPage implements OnInit {
 
     //this nella variabile scope per poterla usare all'interno di addEventListener
     let scope = this;
-    
+
     for (let i = 0; i < this.paths.length; i++) {
       this.paths[i].addEventListener("click", function(){
         let provinceSelectedId = this.getAttribute("id");

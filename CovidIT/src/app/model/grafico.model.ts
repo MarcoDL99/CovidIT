@@ -1,10 +1,9 @@
 export class Grafico{
-  private dataInizio: Date;
-  private dataFine: Date;
-  private nome: string;
+  private nomeDato: string;
+  private dati: any;
 
 }
-export const NOME_POSITIVI = 'Positivi';
-export const NOME_TERAPIE_INTENSIVE= 'Terapie Intensive';
-export const NOME_DECESSI= 'Decessi';
-export const NOME_TAMPONI= 'Tamponi';
+export const CASI = 'Nuovi Casi';
+export const TERAPIE_INTENSIVE= 'Terapie Intensive';
+export const DECESSI= 'Decessi';
+export const TAMPONI= 'Tamponi';

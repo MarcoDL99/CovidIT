@@ -29,7 +29,7 @@ export class ProvincePage implements OnInit {
                private route: ActivatedRoute,
                private provinciaService: ProvinciaService,
                private zone: NgZone) {
-                
+
   }
 
   createMenu(event: Event){
@@ -46,15 +46,15 @@ export class ProvincePage implements OnInit {
         this.provinceId = this.router.getCurrentNavigation().extras.state.idProvince;
       }
      });
-  
+
      //PER PROVA, DA TOGLIERE!!!!
      this.data$ = new Provincia();
-     this.data$.nome="prova"
+     this.data$.nome="prova";
      this.data$.totaleContagi=300;
      this.data$.ultimoAggiornamento="10/10/20";
 
   }
-  
+
   ionViewDidEnter(){
     let obj: any = document.getElementById("mapRegProvince");
     this.svgDoc = obj.contentDocument;

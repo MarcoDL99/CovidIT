@@ -4,7 +4,10 @@ import {PopoverController} from '@ionic/angular';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
 import {GoogleChartInterface} from "ng2-google-charts";
-//import {URL_BASE, URL, URL_FROM_PART, URL_TO_PART} from '../../constants';
+import {Grafico, CASI, DECESSI, TERAPIE_INTENSIVE, TAMPONI} from "../../model/grafico.model";
+import {GraficoService} from "../../services/grafico.service";
+import {Observable} from "rxjs";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-grafici',
@@ -13,55 +16,70 @@ import {GoogleChartInterface} from "ng2-google-charts";
 })
 export class GraficiPage implements OnInit {
 
-  private startDate: any;
-  private endDate: any;
+  private PRIMOGIORNO ='2020-02-24T23:39:03.342+02:00';
+  private oggi: string;
+  private startDate: string;
+  private endDate: string;
   private sourceType: any;
-  private chart: GoogleChartInterface;
+  private graficoCasi: Observable<Grafico[]>;
+  private graficoDecessi: Observable<Grafico[]>;
+  private graficoTerapie: Observable<Grafico[]>;
+  private graficoTamponi: Observable<Grafico[]>;
+  private chartCasi: GoogleChartInterface;
+  private chartDecessi: GoogleChartInterface;
+  private chartTerapie: GoogleChartInterface;
+  private chartTamponi: GoogleChartInterface;
+  private grafici: Observable<Grafico[]>[];
+  private charts$: GoogleChartInterface[];
   constructor(private sanitizer: DomSanitizer,
               private popover: PopoverController,
               private router: Router,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private graficoService: GraficoService) {}
   ngOnInit() {
-    this.startDate = '2020-02-24T23:39:03.342+02:00';
-    this.endDate = new Date().toISOString();
+    this.startDate = this.PRIMOGIORNO;
+    this.oggi= new Date().toISOString();
+    this.endDate = this.oggi;
+    this.grafici= [this.graficoCasi, this.graficoDecessi,this.graficoTerapie,this.graficoTamponi];
+    this.charts$= [this.chartCasi, this.chartDecessi, this.chartTerapie, this.chartTamponi];
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.sourceType = this.router.getCurrentNavigation().extras.state.sourceData;
         console.log(this.sourceType);
       }
     });
-    //this.getData();
-    this.chart = {
-      chartType: 'LineChart',
-      dataTable: [
-        [, 3 ],
-        [, 0],
-        [, 789],
-        [, 711]
-      ],
-      firstRowIsData: true,
-      options: {
-        legend: 'none',
-        title: '', // Titolo preso dalla proprietà scaricata dal database
-        chartArea: {left:'10%', width: '70%'},
-        crosshair: {trigger: 'selection'}, //serve per mostrare i dati quando si seleziona un punto
-      },
-    };
+    this.doRefresh();
   }
   createMenu(event: Event){
     this.popover.create({event,component: PopovermenuPage, showBackdrop:false}).then((popoverElement)=>{popoverElement.present();});
   }
-  set(date, chooser: string){
-    switch (chooser){
-      case 'start':
-        this.startDate=date;
-        //console.log("CASO START "+this.startDate);
-        break;
-      case 'end':
-        this.endDate=date;
-        //console.log("CASO END"+this.endDate);
-        break;
+  doRefresh(){//Nota: Controllare come deve arrivare la data al server
+    this.grafici[0]=this.graficoService.getDati(this.sourceType,CASI,this.startDate,this.endDate);
+    this.grafici[1]=this.graficoService.getDati(this.sourceType,DECESSI,this.startDate,this.endDate);
+    this.grafici[2]=this.graficoService.getDati(this.sourceType,TERAPIE_INTENSIVE,this.startDate,this.endDate);
+    this.grafici[3]=this.graficoService.getDati(this.sourceType,TAMPONI,this.startDate,this.endDate);
+    for (let i = 0; i < 4; i++){
+      let datiChart: any;
+      let titolo: string;
+      this.grafici[i].subscribe((dati: any)=> datiChart=dati); //Devi prendere i dati dal database
+      this.grafici[i].subscribe((nomeDato: any)=> titolo=nomeDato);
+      this.charts$[i]={
+        chartType: 'LineChart',
+        dataTable: datiChart, //Devi prendere i dati dal database
+        firstRowIsData: true,
+        options: {
+          legend: 'none',
+          colors:['black'],
+          backgroundColor: {},
+          title: titolo, //Prendi il titolo dal database
+          chartArea: {left:'15%', width: '64.5%', backgroundColor: {stroke: '#F1B739', strokeWidth: 2}},
+          crosshair: {trigger: 'selection',}, //serve per mostrare i dati quando si seleziona un punto
+          forceIFrame: 'true',//Serve per togliere l'ombra sotto il grafico.
+        },
+      };
     }
   }
+
+
 
 }
