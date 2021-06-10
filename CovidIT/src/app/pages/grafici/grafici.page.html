@@ -18,13 +18,13 @@
 <ion-text class="ion-text-center"><h6>Seleziona l'intervallo temporale:</h6></ion-text>
   <ion-item>
     <ion-label>Dal giorno:</ion-label>
-    <ion-datetime cancelText="Esci" doneText="Conferma"  displayFormat="DD/MM/YYYY" min="2020-02-24" [max]="endDate" placeholder="Seleziona"
-                  [(ngModel)]="startDate" (ionChange)="set(startDate,'start')"></ion-datetime>
+    <ion-datetime cancelText="Esci" doneText="Conferma"  displayFormat="DD/MM/YYYY" [min]="PRIMOGIORNO" [max]="endDate" placeholder="Seleziona"
+                   [(ngModel)]="startDate" (ionChange)="doRefresh()"></ion-datetime>
   </ion-item>
   <ion-item>
     <ion-label>Al giorno:</ion-label>
-    <ion-datetime cancelText="Esci" doneText="Conferma"  displayFormat="DD/MM/YYYY" min="2020-02-24" max="2021-12-31" placeholder="Seleziona"
-                  [(ngModel)]="endDate" (ionChange)="set(endDate,'end')"></ion-datetime>
+    <ion-datetime cancelText="Esci" doneText="Conferma"  displayFormat="DD/MM/YYYY" [min]="startDate" [max]="oggi" placeholder="Seleziona"
+                  [(ngModel)]="endDate" (ionChange)="doRefresh()"></ion-datetime>
   </ion-item>
 
 
@@ -32,10 +32,16 @@
 
   <ion-item class="ion-no-padding "
             style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;" >
-    <google-chart [data]="chart"></google-chart>
+    <google-chart [data]="chartCasi"></google-chart>
   </ion-item>
   <ion-item class="ion-no-padding" style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;" >
-    <google-chart [data]="chart"></google-chart>
+    <google-chart [data]="chartTerapie"></google-chart>
+  </ion-item>
+  <ion-item class="ion-no-padding" style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;" >
+    <google-chart [data]="chartDecessi"></google-chart>
+  </ion-item>
+  <ion-item class="ion-no-padding" style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;" >
+    <google-chart [data]="chartTamponi"></google-chart>
   </ion-item>
 </ion-list>
 
