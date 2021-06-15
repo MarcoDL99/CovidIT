@@ -8,9 +8,9 @@
 </ion-header>
 
 <ion-content >
-  <ion-list  mode="ios" lines="none">
-    <ion-item *ngFor="let faq of faqs$ | async"
-              class="ion-no-padding" style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;"  >
+  <ion-list mode="ios" lines="none" >
+      <div class="ion-no-padding" *ngFor="let faq of faqs$"  style="width: 100%; --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0; margin-inline-end: 0;
+              margin-right: 0; margin-inside: 0; margin-outside: 0;"  >
       <span>
         <ion-item-divider color="dark" >
         <ion-text>
@@ -24,7 +24,7 @@
       </ion-text>
     </ion-item>
       </span>
-    </ion-item>
+    </div>
   </ion-list>
 
 </ion-content>
