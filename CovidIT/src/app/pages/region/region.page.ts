@@ -19,11 +19,8 @@ export class RegionPage implements OnInit {
   regionSVGURL: any;
   paths: any;
   nomeregione: any;
-  //DA SCOMMENTARE
-  //private data$: Observable<TerritorioModel[]>;
 
-  //PER PROVARE
-  private data$: Territorio;
+  private dato$: Territorio;
 
   private nome: string;
 
@@ -36,12 +33,8 @@ export class RegionPage implements OnInit {
       }
      });
      this.nome = this.regionService.getNomeRegione(this.nomeregione);
-
-    //DA SCOMMENTARE!!!!
-     //this.data$ = this.territorioService.loadDatiOdierni(this.nome);
-
-     //PER PROVA
-     this.data$ = new Regione();
+     this.dato$ = this.regionService.bindDati(this.nome);
+     
   }
 
 
@@ -93,6 +86,8 @@ export class RegionPage implements OnInit {
   getSafeUrl(url) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
+
+
 
 }
 

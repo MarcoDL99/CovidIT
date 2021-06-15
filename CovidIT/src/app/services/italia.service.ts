@@ -11,6 +11,7 @@ import { Territorio } from '../model/territorio.model';
 
 export class ItaliaService{
 
+  private dato$: Italia;
 
     constructor(private http: HttpClient){}
 
@@ -29,6 +30,37 @@ export class ItaliaService{
     }
 
 
+    bindDati(): any{
+      
+      let today = new Date();
+      let dd = String(today.getDate()).padStart(2, '0');
+      let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      let yyyy = today.getFullYear();
+
+      let todayString: any;
+      todayString = yyyy + '-' + mm + '-' + dd;
+
+      
+      this.dato$=new Italia();
+      this.loadDati().then(data =>{
+        let italyDatiObj = data['dates'][todayString]['countries']['Italy'];
+        this.dato$.nuovi_decessi = italyDatiObj.today_new_deaths;
+        this.dato$.nuovi_positivi = italyDatiObj.today_new_confirmed;
+        this.dato$.nuovi_terapia_intensiva = italyDatiObj.today_new_intensive_care;
+        this.dato$.nuovi_tamponi = italyDatiObj.today_new_tests;
+        this.dato$.totale_decessi = italyDatiObj.today_deaths;
+        this.dato$.totale_positivi = italyDatiObj.today_confirmed;
+        this.dato$.totale_terapia_intensiva = italyDatiObj.today_intensive_care;
+        this.dato$.totale_tamponi = italyDatiObj.today_tests;
+        let dataAmericana = italyDatiObj.date;
+        let from= dataAmericana;
+        let temp = from.split("-");
+        let dataItaliana = temp[2] + "/" + temp[1] + "/" + temp[0];
+        this.dato$.ultimo_aggiornamento = dataItaliana;
+      });
+    
+      return this.dato$;
+    }
 
 
 

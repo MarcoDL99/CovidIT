@@ -42,12 +42,10 @@ export class ItalyPage implements OnInit {
    }
 
   ngOnInit() {
-    //QUesto è da scommentare!!!!!!!!!!!!!
-    //this.data$ = this.territorioService.loadDatiOdierni(ITALIA);
+    
+    this.dato$ = this.italiaService.bindDati();
 
-    //this.dataa$ = this.italiaService.loadDati();
-
-    //SOLO PER PROVARE, DA CANCELLARE!!!
+    /*
     let today = new Date();
       let dd = String(today.getDate()).padStart(2, '0');
       let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -56,6 +54,7 @@ export class ItalyPage implements OnInit {
       let todayString: any;
       todayString = yyyy + '-' + mm + '-' + dd;
 
+      
       this.dato$=new Italia();
       this.italiaService.loadDati().then(data =>{
         let italyDatiObj = data['dates'][todayString]['countries']['Italy'];
@@ -73,7 +72,7 @@ export class ItalyPage implements OnInit {
         let dataItaliana = temp[2] + "/" + temp[1] + "/" + temp[0];
         this.dato$.ultimo_aggiornamento = dataItaliana;
       });
-    
+    */
     
   }
 

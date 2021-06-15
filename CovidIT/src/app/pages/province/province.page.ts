@@ -17,11 +17,10 @@ export class ProvincePage implements OnInit {
 
   region: any;
   paths: any;
-  //DA SCOMMENTARE
-  //private data$: Observable<Provincia>;
-  private data$: Provincia;
+  private dato$ = new Provincia();
   private svgDoc: any;
   provinceId: any;
+  private nomeProvincia: any;
 
 
   constructor(private popover: PopoverController,
@@ -47,18 +46,20 @@ export class ProvincePage implements OnInit {
       }
      });
 
-     //PER PROVA, DA TOGLIERE!!!!
-     this.data$ = new Provincia();
-     this.data$.nome="prova";
-     this.data$.totaleContagi=300;
-     this.data$.ultimoAggiornamento="10/10/20";
+
+  }
+
+  ionViewWillEnter(){
+      this.dato$ = this.provinciaService.bindDati(this.provinceId);
 
   }
 
   ionViewDidEnter(){
+
     let obj: any = document.getElementById("mapRegProvince");
     this.svgDoc = obj.contentDocument;
     this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#F1B739");
+
 
     this.bindClick();
   }
@@ -82,8 +83,6 @@ export class ProvincePage implements OnInit {
     this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#9DA3B3");
     this.provinceId = id;
     this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#F1B739");
-    //Carica i contagi a partire dall'id della provincia, ovvero il suo nome DA SCOMMENTARE
-    //this.data$ = this.provinciaService.loadContagi(this.provinceId);
   }
 
 }
