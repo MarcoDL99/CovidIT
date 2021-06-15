@@ -16,11 +16,7 @@ import { Italia } from 'src/app/model/italia.model';
 })
 export class ItalyPage implements OnInit {
 
-  //QUESTO E' DA SCOMMENTARE!!!!!!!!!!!!!!!
-  //private data$: Observable<TerritorioModel[]>;
-
-  //SOLO PER PROVARE!!!!!!!!!!!!!!!!!!
-  private data$: Territorio;
+  private dato$: Italia;
 
   constructor(private popover: PopoverController,
               private router: Router,
@@ -49,16 +45,36 @@ export class ItalyPage implements OnInit {
     //QUesto è da scommentare!!!!!!!!!!!!!
     //this.data$ = this.territorioService.loadDatiOdierni(ITALIA);
 
+    //this.dataa$ = this.italiaService.loadDati();
+
     //SOLO PER PROVARE, DA CANCELLARE!!!
-    this.data$ = new Italia();
-    this.data$.nuoviPositivi = 4;
-    this.data$.totPositivi = 2;
-    this.data$.nuoviDecessi = 9;
-    this.data$.totDecessi = 10;
-    this.data$.nuoviTamponi = 4;
-    this.data$.totTamponi = 99;
-    this.data$.nuoviTerapieIntensive = 1;
-    this.data$.totTerapieIntensive = 111;
+    let today = new Date();
+      let dd = String(today.getDate()).padStart(2, '0');
+      let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      let yyyy = today.getFullYear();
+
+      let todayString: any;
+      todayString = yyyy + '-' + mm + '-' + dd;
+
+      this.dato$=new Italia();
+      this.italiaService.loadDati().then(data =>{
+        let italyDatiObj = data['dates'][todayString]['countries']['Italy'];
+        this.dato$.nuovi_decessi = italyDatiObj.today_new_deaths;
+        this.dato$.nuovi_positivi = italyDatiObj.today_new_confirmed;
+        this.dato$.nuovi_terapia_intensiva = italyDatiObj.today_new_intensive_care;
+        this.dato$.nuovi_tamponi = italyDatiObj.today_new_tests;
+        this.dato$.totale_decessi = italyDatiObj.today_deaths;
+        this.dato$.totale_positivi = italyDatiObj.today_confirmed;
+        this.dato$.totale_terapia_intensiva = italyDatiObj.today_intensive_care;
+        this.dato$.totale_tamponi = italyDatiObj.today_tests;
+        let dataAmericana = italyDatiObj.date;
+        let from= dataAmericana;
+        let temp = from.split("-");
+        let dataItaliana = temp[2] + "/" + temp[1] + "/" + temp[0];
+        this.dato$.ultimo_aggiornamento = dataItaliana;
+      });
+    
+    
   }
 
 }

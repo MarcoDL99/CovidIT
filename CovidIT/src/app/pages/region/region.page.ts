@@ -42,14 +42,6 @@ export class RegionPage implements OnInit {
 
      //PER PROVA
      this.data$ = new Regione();
-     this.data$.nuoviPositivi = 4;
-     this.data$.totPositivi = 2;
-      this.data$.nuoviDecessi = 9;
-     this.data$.totDecessi = 10;
-      this.data$.nuoviTamponi = 4;
-     this.data$.totTamponi = 99;
-     this.data$.nuoviTerapieIntensive = 1;
-     this.data$.totTerapieIntensive = 111;
   }
 
 

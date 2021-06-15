@@ -1,4 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Italia, URL_LATEST_DATA_ITALY } from '../model/italia.model';
+import { Territorio } from '../model/territorio.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +12,24 @@ import { Injectable } from '@angular/core';
 export class ItaliaService{
 
 
-    constructor(){}
+    constructor(private http: HttpClient){}
+
+
+    /*
+    loadDati(): Observable<Italia[]>{
+      return this.http.get<Italia[]>(URL_LATEST_DATA_ITALY);
+    }
+    */
+
+
+    loadDati(): any{
+      //Trasformo l'Observable ritornato dalla richiesta get in una promise perchè viene fatta una sola volta.
+      let dataPromise = this.http.get('https://api.covid19tracking.narrativa.com/api/2021-06-15/country/italy').toPromise();
+      return dataPromise;
+    }
+
+
+
 
 
     //AGGIUNGERE PROV AUTONOME

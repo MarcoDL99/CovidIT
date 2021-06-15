@@ -3,7 +3,7 @@ import { Territorio } from "./territorio.model";
 
 export class RegioniModel implements Territorio{
   nuoviDecessi: number;
-  nuoviPositivi: number;
+  nuovi_positivi: number;
   nuoviTamponi: number;
   nuoviTerapieIntensive: number;
   totDecessi: number;
