@@ -33,6 +33,7 @@ export const REGIONI = {
   UMBRIA: 'Umbria',
   VALLE_D_AOSTA: 'Valle d\'Aosta',
   VENETO: 'Veneto',
+  TRENTINO: 'Trentino Alto Adige'
 }
 
 export const ABRUZZO = 'Abruzzo';

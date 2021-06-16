@@ -122,6 +122,12 @@ export class ItaliaService{
           else if (nomeRegione=="Veneto"){
             s = "../assets/svg/regions/veneto.svg";
           }
+          else if (nomeRegione=="P.A. Bolzano"){
+            s = "../assets/svg/regions/bolzano.svg";
+          }
+          else if (nomeRegione=="P.A. Trento"){
+            s = "../assets/svg/regions/trento.svg";
+          }
           return s;
     }
 }

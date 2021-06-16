@@ -20,7 +20,6 @@ export class RegionService{
 
     
     loadDati(): any{
-      this.datoVuoto.nuovi_decessi = 0;
       //Trasformo l'Observable ritornato dalla richiesta get in una promise perchè viene fatta una sola volta.
       let todayDate = this.territorioService.getTodayDate()
       let dataPromise = this.http.get('https://api.covid19tracking.narrativa.com/api/' + todayDate + '/country/italy').toPromise()
@@ -67,8 +66,7 @@ export class RegionService{
     
 
     getOggettoRegione(arrayRegioni: Array<Object>, nomeRegione: string): any{
-      console.log(nomeRegione);
-
+      
       for (let element of arrayRegioni){
         if (element['name']==nomeRegione){
           return element;
@@ -128,10 +126,13 @@ export class RegionService{
           else if (nomeRegione=="Toscana"){
             s = REGIONI.TOSCANA;
           }
-          else if (nomeRegione=="Provincia Autonoma di Trento"){
+          else if (nomeRegione == "Trentino-Alto Adige"){
+            s = REGIONI.TRENTINO;
+          }
+          else if (nomeRegione=="P.A. Trento"){
             s = REGIONI.PROVAUT_TRENTO;
           }
-          else if (nomeRegione=="Provincia Autonoma di Bolzano"){
+          else if (nomeRegione=="P.A. Bolzano"){
             s = REGIONI.PROVAUT_BOLZANO;
           }
           else if (nomeRegione=="Umbria"){

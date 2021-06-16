@@ -39,7 +39,7 @@ export class RegionPage implements OnInit {
       let todayString = this.territorioService.getTodayDate();
 
       
-      this.dato$=new Regione();
+      this.dato$=new Regione();{
       this.regionService.loadDati().then(data =>{
         console.log(todayString);
         let arrayRegioni = data['dates'][todayString]['countries']['Italy']['regions'];
@@ -61,7 +61,7 @@ export class RegionPage implements OnInit {
       .catch(() =>{
         this.territorioService.showErrorToast();
       });
-     
+    }
   }
 
 
