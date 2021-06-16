@@ -20,6 +20,11 @@ export class ProvinciaService{
       }
 
     bindDati(nomeProvincia: string){
+
+        
+
+
+        /*
         this.dato$ = new Provincia();
         this.loadDati().then(data => {
             let provinciaObj = this.getOggettoProvincia(data, nomeProvincia)
@@ -28,11 +33,11 @@ export class ProvinciaService{
             this.dato$.ultimoAggiornamento = dataUltimoAggiornamento;
         })
         return this.dato$;
-
+        */
     }
 
     getData(dataObj: string): string{
-        let dataAmericana = dataObj.substring(0,11);
+        let dataAmericana = dataObj.substring(0,10);
         let from= dataAmericana;
         let temp = from.split("-");
         let dataItaliana = temp[2] + "/" + temp[1] + "/" + temp[0];

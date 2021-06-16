@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Italia, URL_LATEST_DATA_ITALY } from '../model/italia.model';
 import { Territorio } from '../model/territorio.model';
+import { TerritorioService } from './territorio.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class ItaliaService{
 
   private dato$: Italia;
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient, private territorioService: TerritorioService){}
 
 
     /*
@@ -24,23 +25,18 @@ export class ItaliaService{
 
 
     loadDati(): any{
+      let todayDate = this.territorioService.getTodayDate();
       //Trasformo l'Observable ritornato dalla richiesta get in una promise perchè viene fatta una sola volta.
-      let dataPromise = this.http.get('https://api.covid19tracking.narrativa.com/api/2021-06-15/country/italy').toPromise();
+      let dataPromise = this.http.get('https://api.covid19tracking.narrativa.com/api/' + todayDate + '/country/italy').toPromise();
       return dataPromise;
     }
 
 
     bindDati(): any{
       
-      let today = new Date();
-      let dd = String(today.getDate()).padStart(2, '0');
-      let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-      let yyyy = today.getFullYear();
+      /*
+      let todayString = this.territorioService.getTodayDate();
 
-      let todayString: any;
-      todayString = yyyy + '-' + mm + '-' + dd;
-
-      
       this.dato$=new Italia();
       this.loadDati().then(data =>{
         let italyDatiObj = data['dates'][todayString]['countries']['Italy'];
@@ -58,8 +54,7 @@ export class ItaliaService{
         let dataItaliana = temp[2] + "/" + temp[1] + "/" + temp[0];
         this.dato$.ultimo_aggiornamento = dataItaliana;
       });
-    
-      return this.dato$;
+    */
     }
 
 
@@ -82,7 +77,7 @@ export class ItaliaService{
           else if (nomeRegione=="Emilia-Romagna"){
             s = "../assets/svg/regions/emiliaRomagna.svg";
           }
-          else if (nomeRegione=="Friuli-Venezia Giulia"){
+          else if (nomeRegione=="Friuli Venezia Giulia"){
             s = "../assets/svg/regions/friuliVeneziaGiulia.svg";
           }
           else if (nomeRegione=="Lazio"){
@@ -125,7 +120,7 @@ export class ItaliaService{
             s = "../assets/svg/regions/valleDAosta.svg";
           }
           else if (nomeRegione=="Veneto"){
-            s = 'veneto';
+            s = "../assets/svg/regions/veneto.svg";
           }
           return s;
     }

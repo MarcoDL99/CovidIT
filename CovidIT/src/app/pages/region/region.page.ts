@@ -8,6 +8,8 @@ import { TerritorioService } from 'src/app/services/territorio.service';
 import { Observable } from 'rxjs';
 import { Territorio } from 'src/app/model/territorio.model';
 import { Regione } from 'src/app/model/regione.model';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-region',
@@ -33,7 +35,32 @@ export class RegionPage implements OnInit {
       }
      });
      this.nome = this.regionService.getNomeRegione(this.nomeregione);
-     this.dato$ = this.regionService.bindDati(this.nome);
+    
+      let todayString = this.territorioService.getTodayDate();
+
+      
+      this.dato$=new Regione();
+      this.regionService.loadDati().then(data =>{
+        console.log(todayString);
+        let arrayRegioni = data['dates'][todayString]['countries']['Italy']['regions'];
+        let regionDatiObj = this.regionService.getOggettoRegione(arrayRegioni, this.nomeregione);
+        this.dato$.nuovi_decessi = regionDatiObj.today_new_deaths;
+        this.dato$.nuovi_positivi = regionDatiObj.today_new_confirmed;
+        this.dato$.nuovi_terapia_intensiva = regionDatiObj.today_new_intensive_care;
+        this.dato$.nuovi_tamponi = regionDatiObj.today_new_tests;
+        this.dato$.totale_decessi = regionDatiObj.today_deaths;
+        this.dato$.totale_positivi = regionDatiObj.today_confirmed;
+        this.dato$.totale_terapia_intensiva = regionDatiObj.today_intensive_care;
+        this.dato$.totale_tamponi = regionDatiObj.today_tests;
+        let dataAmericana = regionDatiObj.date;
+        let from= dataAmericana;
+        let temp = from.split("-");
+        let dataItaliana = temp[2] + "/" + temp[1] + "/" + temp[0];
+        this.dato$.ultimo_aggiornamento = dataItaliana;
+      })
+      .catch(() =>{
+        this.territorioService.showErrorToast();
+      });
      
   }
 
@@ -63,6 +90,7 @@ export class RegionPage implements OnInit {
               private route: ActivatedRoute,
               private regionService: RegionService,
               private territorioService: TerritorioService,
+              private toastr: ToastrService
               ) {}
 
 
@@ -88,6 +116,7 @@ export class RegionPage implements OnInit {
   }
 
 
+  
 
 }
 

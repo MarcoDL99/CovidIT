@@ -21,7 +21,8 @@ export class ItalyPage implements OnInit {
   constructor(private popover: PopoverController,
               private router: Router,
               //private territorioService: TerritorioService,
-              private italiaService: ItaliaService
+              private italiaService: ItaliaService,
+              private territorioService: TerritorioService
   ) {
   }
    createMenu(event: Event){
@@ -43,7 +44,28 @@ export class ItalyPage implements OnInit {
 
   ngOnInit() {
     
-    this.dato$ = this.italiaService.bindDati();
+    let todayString = this.territorioService.getTodayDate();
+
+      this.dato$=new Italia();
+      this.italiaService.loadDati().then(data =>{
+        let italyDatiObj = data['dates'][todayString]['countries']['Italy'];
+        this.dato$.nuovi_decessi = italyDatiObj.today_new_deaths;
+        this.dato$.nuovi_positivi = italyDatiObj.today_new_confirmed;
+        this.dato$.nuovi_terapia_intensiva = italyDatiObj.today_new_intensive_care;
+        this.dato$.nuovi_tamponi = italyDatiObj.today_new_tests;
+        this.dato$.totale_decessi = italyDatiObj.today_deaths;
+        this.dato$.totale_positivi = italyDatiObj.today_confirmed;
+        this.dato$.totale_terapia_intensiva = italyDatiObj.today_intensive_care;
+        this.dato$.totale_tamponi = italyDatiObj.today_tests;
+        let dataAmericana = italyDatiObj.date;
+        let from= dataAmericana;
+        let temp = from.split("-");
+        let dataItaliana = temp[2] + "/" + temp[1] + "/" + temp[0];
+        this.dato$.ultimo_aggiornamento = dataItaliana;
+      })
+      .catch(()=>{
+        this.territorioService.showErrorToast();
+      });
 
     /*
     let today = new Date();

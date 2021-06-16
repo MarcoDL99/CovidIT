@@ -1,6 +1,10 @@
 import { Regione, REGIONI } from '../model/regione.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { TerritorioService } from './territorio.service';
+import { catchError } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { Territorio } from '../model/territorio.model';
 
 
 @Injectable({
@@ -9,19 +13,23 @@ import { HttpClient } from '@angular/common/http';
 export class RegionService{
 
   private dato$: Regione;
+  private datoVuoto = new Regione();
   
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient, private territorioService: TerritorioService){}
 
-
+    
     loadDati(): any{
+      this.datoVuoto.nuovi_decessi = 0;
       //Trasformo l'Observable ritornato dalla richiesta get in una promise perchè viene fatta una sola volta.
-      let dataPromise = this.http.get('https://api.covid19tracking.narrativa.com/api/2021-06-15/country/italy').toPromise();
+      let todayDate = this.territorioService.getTodayDate()
+      let dataPromise = this.http.get('https://api.covid19tracking.narrativa.com/api/' + todayDate + '/country/italy').toPromise()
       return dataPromise;
     }
 
 
     bindDati(nomeRegione: string): any{
+      /*
 
       
       let today = new Date();
@@ -54,11 +62,12 @@ export class RegionService{
         
       });
     
-      return this.dato$;
+      return this.dato$;*/
     }
     
 
     getOggettoRegione(arrayRegioni: Array<Object>, nomeRegione: string): any{
+      console.log(nomeRegione);
 
       for (let element of arrayRegioni){
         if (element['name']==nomeRegione){
@@ -86,7 +95,7 @@ export class RegionService{
           else if (nomeRegione=="Emilia-Romagna"){
             s = REGIONI.EMILIA_ROMAGNA;
           }
-          else if (nomeRegione=="Friuli-Venezia Giulia"){
+          else if (nomeRegione=="Friuli Venezia Giulia"){
             s = REGIONI.FRIULI_VENEZIA_GIULIA;
           }
           else if (nomeRegione=="Lazio"){
@@ -136,4 +145,6 @@ export class RegionService{
           }
           return s;
     }
+
+
 }

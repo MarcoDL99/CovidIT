@@ -3,7 +3,7 @@ import {Observable} from "rxjs";
 import {URL} from '../constants';
 import { Territorio } from "../model/territorio.model";
 import { Injectable } from '@angular/core';
-
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -13,24 +13,30 @@ import { Injectable } from '@angular/core';
 export class TerritorioService{
 
 
-    constructor(private http: HttpClient) {
+
+
+    constructor(private toastr: ToastrService) {
     }
 
-    /*
-    nuoviDecessi: number;
-  nuoviPositivi: number;
-  nuoviTamponi: number;
-  nuoviTerapieIntensive: number;
-  totDecessi: number;
-  totPositivi: number;
-  totTamponi: number;
-  totTerapieIntensive: number;
-    */
 
-    //Carica i dati odierni del territorio selezionato, che può essere italia o regione.
-    loadDatiOdierni(territorio: String): Observable<Territorio>{
-        return this.http.get<Territorio>(URL.TERRITORIO + "/" + territorio);
+    getTodayDate(): string{
+      let today = new Date();
+      let dd = String(today.getDate()).padStart(2, '0');
+      let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      let yyyy = today.getFullYear();
+
+      let todayString: any;
+      todayString = yyyy + '-' + mm + '-' + dd;
+      return todayString;
     }
+
+    showErrorToast(): void{
+      this.toastr.error("C'è stato un errore nel caricamento dei dati, controllare la propria connessione e riprovaret.","ERRORE");
+    }
+
+    
+
+    
 
     
 
