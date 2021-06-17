@@ -1,4 +1,6 @@
-
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons class="titolo" slot="start">
@@ -19,30 +21,28 @@
   <ion-item>
     <ion-label>Dal giorno:</ion-label>
     <ion-datetime cancelText="Esci" doneText="Conferma"  displayFormat="DD/MM/YYYY" [min]="PRIMOGIORNO" [max]="endDate" placeholder="Seleziona"
-                   [(ngModel)]="startDate" (ionChange)="doRefresh()"></ion-datetime>
+                   [(ngModel)]="startDate"></ion-datetime>
   </ion-item>
   <ion-item>
     <ion-label>Al giorno:</ion-label>
     <ion-datetime cancelText="Esci" doneText="Conferma"  displayFormat="DD/MM/YYYY" [min]="startDate" [max]="oggi" placeholder="Seleziona"
-                  [(ngModel)]="endDate" (ionChange)="doRefresh()"></ion-datetime>
+                  [(ngModel)]="endDate"></ion-datetime>
   </ion-item>
+  <ion-button shape="round" color="secondary" expand="block" class="ion-text-center" (click)="doRefresh()">
+    <ion-text class="ion-text-center">
+      <p class="text_grafici">Aggiorna i grafici</p>
+    </ion-text>
+  </ion-button>
+<div>
+  <canvas id="myChart" width="400" height="400"></canvas>
+</div>
+<div async >
+  <ion-list  mode="ios" lines="none">
+    <ion-item class="ion-no-padding "
+              style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;" >
 
-
-<ion-list mode="ios" lines="none">
-
-  <ion-item class="ion-no-padding "
-            style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;" >
-    <google-chart [data]="chartCasi"></google-chart>
-  </ion-item>
-  <ion-item class="ion-no-padding" style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;" >
-    <google-chart [data]="chartTerapie"></google-chart>
-  </ion-item>
-  <ion-item class="ion-no-padding" style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;" >
-    <google-chart [data]="chartDecessi"></google-chart>
-  </ion-item>
-  <ion-item class="ion-no-padding" style=" --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0;" >
-    <google-chart [data]="chartTamponi"></google-chart>
-  </ion-item>
-</ion-list>
-
+    </ion-item>
+  </ion-list>
+</div>
 </ion-content>
+

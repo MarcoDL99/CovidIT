@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Italia, URL_LATEST_DATA_ITALY } from '../model/italia.model';
 import { Territorio } from '../model/territorio.model';
-import { TerritorioService } from './territorio.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class ItaliaService{
 
   private dato$: Italia;
 
-    constructor(private http: HttpClient, private territorioService: TerritorioService){}
+    constructor(private http: HttpClient){}
 
 
     /*
@@ -24,37 +23,41 @@ export class ItaliaService{
     */
 
 
-    loadDati(): any{
-      let todayDate = this.territorioService.getTodayDate();
+    loadDati(today: string): any{
       //Trasformo l'Observable ritornato dalla richiesta get in una promise perchè viene fatta una sola volta.
-      let dataPromise = this.http.get('https://api.covid19tracking.narrativa.com/api/' + todayDate + '/country/italy').toPromise();
+      let dataPromise = this.http.get('https://api.covid19tracking.narrativa.com/api/'+today+'/country/italy').toPromise();
       return dataPromise;
     }
 
 
     bindDati(): any{
-      
-      /*
-      let todayString = this.territorioService.getTodayDate();
+
+      let today = new Date();
+      let dd = String(today.getDate()).padStart(2, '0');
+      let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      let yyyy = today.getFullYear();
+      let todayString: string = yyyy + '-' + mm + '-' + dd;
 
       this.dato$=new Italia();
-      this.loadDati().then(data =>{
-        let italyDatiObj = data['dates'][todayString]['countries']['Italy'];
-        this.dato$.nuovi_decessi = italyDatiObj.today_new_deaths;
-        this.dato$.nuovi_positivi = italyDatiObj.today_new_confirmed;
-        this.dato$.nuovi_terapia_intensiva = italyDatiObj.today_new_intensive_care;
-        this.dato$.nuovi_tamponi = italyDatiObj.today_new_tests;
-        this.dato$.totale_decessi = italyDatiObj.today_deaths;
-        this.dato$.totale_positivi = italyDatiObj.today_confirmed;
-        this.dato$.totale_terapia_intensiva = italyDatiObj.today_intensive_care;
-        this.dato$.totale_tamponi = italyDatiObj.today_tests;
-        let dataAmericana = italyDatiObj.date;
-        let from= dataAmericana;
-        let temp = from.split("-");
-        let dataItaliana = temp[2] + "/" + temp[1] + "/" + temp[0];
-        this.dato$.ultimo_aggiornamento = dataItaliana;
-      });
-    */
+      this.loadDati(todayString).then(data =>{
+          let italyDatiObj = data['dates'][todayString]['countries']['Italy'];
+          this.dato$.nuovi_decessi = italyDatiObj.today_new_deaths;
+          this.dato$.nuovi_positivi = italyDatiObj.today_new_confirmed;
+          this.dato$.nuovi_terapia_intensiva = italyDatiObj.today_new_intensive_care;
+          this.dato$.nuovi_tamponi = italyDatiObj.today_new_tests;
+          this.dato$.totale_decessi = italyDatiObj.today_deaths;
+          this.dato$.totale_positivi = italyDatiObj.today_confirmed;
+          this.dato$.totale_terapia_intensiva = italyDatiObj.today_intensive_care;
+          this.dato$.totale_tamponi = italyDatiObj.today_tests;
+          let dataAmericana = italyDatiObj.date;
+          let from = dataAmericana;
+          let temp = from.split("-");
+          let dataItaliana = temp[2] + "/" + temp[1] + "/" + temp[0];
+          this.dato$.ultimo_aggiornamento = dataItaliana;
+        });
+
+
+      return this.dato$;
     }
 
 
@@ -77,7 +80,7 @@ export class ItaliaService{
           else if (nomeRegione=="Emilia-Romagna"){
             s = "../assets/svg/regions/emiliaRomagna.svg";
           }
-          else if (nomeRegione=="Friuli Venezia Giulia"){
+          else if (nomeRegione=="Friuli-Venezia Giulia"){
             s = "../assets/svg/regions/friuliVeneziaGiulia.svg";
           }
           else if (nomeRegione=="Lazio"){
@@ -120,13 +123,7 @@ export class ItaliaService{
             s = "../assets/svg/regions/valleDAosta.svg";
           }
           else if (nomeRegione=="Veneto"){
-            s = "../assets/svg/regions/veneto.svg";
-          }
-          else if (nomeRegione=="P.A. Bolzano"){
-            s = "../assets/svg/regions/bolzano.svg";
-          }
-          else if (nomeRegione=="P.A. Trento"){
-            s = "../assets/svg/regions/trento.svg";
+            s = 'veneto';
           }
           return s;
     }
