@@ -31,7 +31,7 @@ export class TerritorioService{
     }
 
     showErrorToast(): void{
-      this.toastr.error("C'è stato un errore nel caricamento dei dati, controllare la propria connessione e riprovaret.","ERRORE");
+      this.toastr.error("C'è stato un errore nel caricamento dei dati, controllare la propria connessione e riprovare.","ERRORE");
     }
 
     
