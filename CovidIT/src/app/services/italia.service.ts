@@ -18,12 +18,8 @@ export class ItaliaService{
 
 
     /*
-    loadDati(): Observable<Italia[]>{
-      return this.http.get<Italia[]>(URL_LATEST_DATA_ITALY);
-    }
+    Funzione che esegue la richiesta http alle api per i dati e li trasforma in una promise catturata da bindDati()
     */
-
-
     loadDati(): any{
       let todayDate = this.territorioService.getTodayDate();
       //Trasformo l'Observable ritornato dalla richiesta get in una promise perchè viene fatta una sola volta.
@@ -32,9 +28,12 @@ export class ItaliaService{
     }
 
 
+    /*
+    Funzione che serve a restituire i dati scaricati alla page
+    */
     bindDati(): any{
       
-      /*
+      
       let todayString = this.territorioService.getTodayDate();
 
       this.dato$=new Italia();
@@ -53,13 +52,20 @@ export class ItaliaService{
         let temp = from.split("-");
         let dataItaliana = temp[2] + "/" + temp[1] + "/" + temp[0];
         this.dato$.ultimo_aggiornamento = dataItaliana;
+      }).catch(()=>{
+        this.territorioService.showErrorToast();
       });
-    */
+
+      return this.dato$;
+
+    
     }
 
 
 
-    //AGGIUNGERE PROV AUTONOME
+    /*
+    Funzione che serve a prendere il corretto path per l'svg della regione scelta
+    */
     getRegionSVG(nomeRegione: string): string{
         let s="";
         if (nomeRegione=="Abruzzo"){

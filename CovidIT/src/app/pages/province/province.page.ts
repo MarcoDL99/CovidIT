@@ -52,16 +52,8 @@ export class ProvincePage implements OnInit {
   }
 
   ionViewWillEnter(){
-    this.provinciaService.loadDati().then(data => {
-      let provinciaObj = this.provinciaService.getOggettoProvincia(data, this.provinceId);
-      this.dato$.totaleContagi = provinciaObj['totale_casi'];
-      let dataUltimoAggiornamento = this.provinciaService.getData(provinciaObj['data']);
-      this.dato$.ultimoAggiornamento = dataUltimoAggiornamento;
-  })
-  .catch(()=>{
-    this.territorioService.showErrorToast();
-    });
-  
+    this.dato$ = this.provinciaService.bindDati(this.provinceId);
+
   }
 
 
@@ -94,16 +86,9 @@ export class ProvincePage implements OnInit {
   doRefresh(id: string){
     this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#9DA3B3");
     this.provinceId = id;
-    this.provinciaService.loadDati().then(data => {
-      let provinciaObj = this.provinciaService.getOggettoProvincia(data, this.provinceId);
-      this.dato$.totaleContagi = provinciaObj['totale_casi'];
-      let dataUltimoAggiornamento = this.provinciaService.getData(provinciaObj['data']);
-      this.dato$.ultimoAggiornamento = dataUltimoAggiornamento;
-      this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#F1B739");
-  })
-  .catch(()=>{
-  this.territorioService.showErrorToast();
-  });
+    this.dato$ = this.provinciaService.bindDati(this.provinceId);
+    this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#F1B739");
   }
+  
 }
 
