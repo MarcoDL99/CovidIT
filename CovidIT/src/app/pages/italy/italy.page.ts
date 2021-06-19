@@ -36,6 +36,7 @@ export class ItalyPage implements OnInit {
      this.router.navigate(['/grafici'], NavigationExtras);
    }
 
+   //Funzione che prende il nome della regione e lo inserisce negli extras insieme al path per l'svg da displayare
    goToRegion(event: Event){
     let nomeRegione = (<HTMLInputElement> event.target).getAttribute('title');
     let regionSVG = this.italiaService.getRegionSVG(nomeRegione);

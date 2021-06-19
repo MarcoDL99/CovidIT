@@ -19,6 +19,7 @@ export class TerritorioService{
     }
 
 
+    //Funzione che ottiene la data odierna per la richiesta alle API
     getTodayDate(): string{
       let today = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Rome"}));
       if (today.getHours()<10){
@@ -35,6 +36,7 @@ export class TerritorioService{
       return todayString;
     }
 
+    //funzione per mostrare un toast di errore in caso di fallimento di caricamento dei dati
     showErrorToast(): void{
       this.toastr.error("C'è stato un errore nel caricamento dei dati, controllare la propria connessione e riprovare.","ERRORE");
     }

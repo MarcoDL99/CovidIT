@@ -18,7 +18,7 @@ export class RegionService{
 
     constructor(private http: HttpClient, private territorioService: TerritorioService){}
 
-    
+    //Funzione che prende i dati dalle API
     loadDati(): any{
       //Trasformo l'Observable ritornato dalla richiesta get in una promise perchè viene fatta una sola volta.
       let todayDate = this.territorioService.getTodayDate()
@@ -27,6 +27,8 @@ export class RegionService{
     }
 
 
+
+    //Funzione che restituisce i dati presi dalla loadDati()
     bindDati(nomeRegione: string): any{
       
 
@@ -61,6 +63,7 @@ export class RegionService{
     }
     
 
+    //Funzione che ottiene l'oggetto regione a partire dall'array restituito dalle API
     getOggettoRegione(arrayRegioni: Array<Object>, nomeRegione: string): any{
       
       for (let element of arrayRegioni){
@@ -72,6 +75,7 @@ export class RegionService{
     }
 
 
+    //Funzione che restituisce il nome corretto della regione per una visualizzazione più user-friendly
     getNomeRegione(nomeRegione: string): string{
         let s=""
         if (nomeRegione=="Abruzzo"){

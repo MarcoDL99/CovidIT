@@ -46,6 +46,7 @@ export class ProvinciaService{
 
     }
 
+    //Funzione che ottiene la data italiana da quella americana
     getData(dataObj: string): string{
         let dataAmericana = dataObj.substring(0,10);
         let from= dataAmericana;

@@ -15,4 +15,4 @@ export class Italia implements Territorio{
   regioni: string[] = NOMI_REGIONI;
 }
 
-export const URL_LATEST_DATA_ITALY = 'https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale-latest.json';
+

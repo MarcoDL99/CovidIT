@@ -38,9 +38,10 @@ export class ProvincePage implements OnInit {
   }
 
 
+
   ngOnInit() {
 
-
+    //Prende i dati arrivati dal router per settare l'svg e il nome della provincia
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.region = this.router.getCurrentNavigation().extras.state.regionSVG;
@@ -52,6 +53,7 @@ export class ProvincePage implements OnInit {
   }
 
   ionViewWillEnter(){
+    //Funzione per il caricamento dei dati della provincia
     this.dato$ = this.provinciaService.bindDati(this.provinceId);
 
   }
@@ -59,17 +61,18 @@ export class ProvincePage implements OnInit {
 
   ionViewDidEnter(){
 
+    //Cambio del colore della provincia scelta
     let obj: any = document.getElementById("mapRegProvince");
     this.svgDoc = obj.contentDocument;
     this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#F1B739");
 
-
+    
     this.bindClick();
 
   }
 
 
-
+  //A ogni provincia si associa un event listener sul click per cambiare provincia
   bindClick(){
     this.paths = this.svgDoc.getElementsByTagName("path");
     let scope= this;
@@ -83,6 +86,7 @@ export class ProvincePage implements OnInit {
     }
   }
 
+  //doRefresh è usato per cambiare colore alla provincia selezionata e caricarne i dati
   doRefresh(id: string){
     this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#9DA3B3");
     this.provinceId = id;

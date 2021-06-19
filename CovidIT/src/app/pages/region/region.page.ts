@@ -27,20 +27,24 @@ export class RegionPage implements OnInit {
   private nome: string;
 
 
+
   ngOnInit() {
+    //Prendo gli extras della navigazione da italia
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.regionSVGURL = this.getSafeUrl(this.router.getCurrentNavigation().extras.state.regionSVG);
         this.nomeregione = this.router.getCurrentNavigation().extras.state.nomeReg;
       }
      });
+     //Prendo il nome della regione
      this.nome = this.regionService.getNomeRegione(this.nomeregione);
-    
+    //prendo i dati da internet
     this.dato$ = this.regionService.bindDati(this.nomeregione);
   }
 
 
 
+  //Associo a ogni provincia un event listener sul click tale che si prenda l'id e permetta la navigazione alla provincia scelta
   bindClick(){
     let obj: any = document.getElementById("mapReg");
     let svgDoc = obj.contentDocument;
@@ -82,6 +86,7 @@ export class RegionPage implements OnInit {
     this.bindClick();
   }
 
+  //Funzione per permettere l'ottenimento dell'svg in modo sicuro
   getSafeUrl(url) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }

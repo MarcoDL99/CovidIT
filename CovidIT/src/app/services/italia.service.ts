@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Italia, URL_LATEST_DATA_ITALY } from '../model/italia.model';
+import { Italia} from '../model/italia.model';
 import { Territorio } from '../model/territorio.model';
 import { TerritorioService } from './territorio.service';
 
