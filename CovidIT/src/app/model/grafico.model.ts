@@ -1,14 +1,10 @@
 export class Grafico{
-   _nomeDato: string;
-   _dati: [] =[];
-
-  get nomeDato(): string {
-    return this._nomeDato;
-  }
-
-  get dati(): any {
-    return this._dati;
-  }
+   positivi: number[] = [];
+   decessi: number[] = [];
+   terapie: number[] = [];
+   tamponi: number[] = [];
+   giorni: string[] = [];
+   dati = [this.positivi,this.decessi,this.terapie,this.tamponi];
 }
 export const POSITIVI = 'Nuovi Casi';
 export const TERAPIE_INTENSIVE= 'Terapie Intensive';

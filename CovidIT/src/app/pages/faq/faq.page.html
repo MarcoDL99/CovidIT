@@ -8,23 +8,20 @@
 </ion-header>
 
 <ion-content >
-  <ion-list mode="ios" lines="none" >
-      <div class="ion-no-padding" *ngFor="let faq of faqs$"  style="width: 100%; --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0; margin-inline-end: 0;
-              margin-right: 0; margin-inside: 0; margin-outside: 0;"  >
-      <span>
-        <ion-item-divider color="dark" >
-        <ion-text>
-          <h3>{{faq.domanda}}</h3>
-        </ion-text>
 
-      </ion-item-divider>
-        <ion-item color="secondary">
+      <div class="ion-no-padding" *ngFor="let faq of faqs$"  >
+      <span>
+        <ion-card>
+          <ion-card-header class="background-answer ion-no-padding" >
+      <ion-card-title class="ion-text-center" style="">{{faq.domanda}}</ion-card-title>
+            </ion-card-header>
+        <ion-item>
       <ion-text>
         <p>{{faq.risposta}}</p>
       </ion-text>
     </ion-item>
+          </ion-card>
       </span>
     </div>
-  </ion-list>
 
 </ion-content>

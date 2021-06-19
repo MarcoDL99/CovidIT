@@ -13,8 +13,7 @@ import {Italia} from '../model/italia.model';
 export class GraficoService{
   constructor(private http: HttpClient) {
   }
-
-  async loadDati(nomeTerritorio: string, startDate: string, endDate: string): Promise<any> {
+  loadDati(nomeTerritorio: string, startDate: string, endDate: string): Promise<any> {
     let sito: string= URL_BASE;
    // if(nomeTerritorio!=='italia') {
    //   sito = sito + URL.REGION;
@@ -28,7 +27,7 @@ export class GraficoService{
     sito= sito+URL_DATE_FROM+start+URL_DATE_TO+end;
     console.log(sito);
     //Trasformo l'Observable ritornato dalla richiesta get in una promise perchè viene fatta una sola volta.
-    const dataPromise = await this.http.get(sito).toPromise();
+    const dataPromise = this.http.get(sito).toPromise();
     return dataPromise;
   }
 
@@ -47,28 +46,31 @@ export class GraficoService{
     return dates;
   }
 
-  getDati(nomeTerritorio: string, startDate: string, endDate: string): any {
-    const grafici: Grafico[] = [new Grafico(),new Grafico(), new Grafico(), new Grafico()];
+  getDati(nomeTerritorio: string, startDate: string, endDate: string): Grafico {
+    const grafico: Grafico = new Grafico();
     let datiObj;
     let datiPerGiorno;
     this.loadDati(nomeTerritorio, startDate, endDate).then(data =>{
-      const dates: string[] = this.getArrayDate(startDate, endDate);
+      const date: string[] = this.getArrayDate(startDate, endDate);
       if(nomeTerritorio==='italia'){
         datiObj = data.dates;
       }
       else{
         //datiObj = data.dates[datestring].countries.Italy.regions[0];
       }
-      for (let i = 0; i < dates.length; i++){
-        let datestring = dates[i].slice(0,10);
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
+      for (let i = 0; i < date.length; i++){
+        let datestring = date[i].slice(0,10);
         if (datestring[9]==='T'){ datestring=datestring.slice(0,-1);}
         datiPerGiorno=datiObj[datestring].countries.Italy;
-        grafici[0].dati.push([datestring, datiPerGiorno.today_new_confirmed]);
-        grafici[1].dati.push([datestring, datiPerGiorno.today_new_deaths]);
-        grafici[2].dati.push([datestring, datiPerGiorno.today_new_tests]);
-        grafici[3].dati.push([datestring, datiPerGiorno.today_new_intensive_care]);
+        console.log(datiPerGiorno.today_new_confirmed);
+        grafico.giorni.push(datestring);
+        grafico.positivi.push(Number.parseInt(datiPerGiorno.today_new_confirmed, 10));
+        grafico.decessi.push(Number.parseInt(datiPerGiorno.today_new_deaths,10));
+        grafico.tamponi.push(Number.parseInt(datiPerGiorno.today_new_tests,10));
+        grafico.terapie.push(Number.parseInt(datiPerGiorno.today_new_intensive_care,10));
       }
     });
-    return grafici;
+    return grafico;
   }
 }
