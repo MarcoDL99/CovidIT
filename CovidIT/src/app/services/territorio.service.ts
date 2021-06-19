@@ -20,10 +20,15 @@ export class TerritorioService{
 
 
     getTodayDate(): string{
-      let today = new Date();
+      let today = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Rome"}));
+      if (today.getHours()<10){
+        today.setDate(today.getDate() - 1);
+      }
       let dd = String(today.getDate()).padStart(2, '0');
       let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
       let yyyy = today.getFullYear();
+
+      
 
       let todayString: any;
       todayString = yyyy + '-' + mm + '-' + dd;

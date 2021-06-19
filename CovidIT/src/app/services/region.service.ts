@@ -36,7 +36,6 @@ export class RegionService{
       
       this.dato$=new Regione();{
         this.loadDati().then(data =>{
-          console.log(todayString);
           let arrayRegioni = data['dates'][todayString]['countries']['Italy']['regions'];
           let regionDatiObj = this.getOggettoRegione(arrayRegioni, nomeRegione);
           this.dato$.nuovi_decessi = regionDatiObj.today_new_deaths;
