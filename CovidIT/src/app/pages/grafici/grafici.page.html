@@ -34,12 +34,11 @@
     <div class="ion-no-padding" *ngFor="let chart of charts$; index as i"  style="width: 100%; --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0; margin-inline-end: 0;
                 margin-right: 0; margin-inside: 0; margin-outside: 0;"  >
         <span>
-
     <ion-card class="welcome-card">
       <ion-card-header>
         <ion-card-title>{{titoli$[i]}}</ion-card-title>
       </ion-card-header>
-          <div  id="'{{chart}}'" style="width:100%; height:400px;"></div>
+          <div  id='{{chart}}' style="width:100%; height:400px;"></div>
     </ion-card>
         </span>
     </div>
