@@ -13,6 +13,7 @@ import {
 export class ContattoService{
   constructor() {
   }
+  //Fornisce tutti i Contatti
   list(): Contatto[] {
     let contacts: Contatto[];
     let abruzzo: Contatto = new Contatto(ABRUZZO, [new ContattoComponent('Numero Verde Regionale','800 595 459','numero')]);

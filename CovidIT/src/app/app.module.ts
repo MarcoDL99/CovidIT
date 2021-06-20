@@ -11,14 +11,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import {CallNumber} from "@ionic-native/call-number/ngx";
-import {EmailComposer} from "@ionic-native/email-composer/ngx";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, PopovermenuPageModule, HttpClientModule,
     ToastrModule.forRoot(),BrowserAnimationsModule ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },CallNumber, EmailComposer],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },CallNumber,],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

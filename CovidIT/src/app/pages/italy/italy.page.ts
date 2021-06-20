@@ -26,13 +26,13 @@ export class ItalyPage implements OnInit {
               private territorioService: TerritorioService
   ) {
   }
-  
+
    createMenu(event: Event){
     this.popover.create({event,component: PopovermenuPage, showBackdrop:false}).then((popoverElement)=>{popoverElement.present();});
    }
 
    gotoGrafici(){
-     let NavigationExtras: NavigationExtras = {state: {sourceData: 'italia'}};
+     let NavigationExtras: NavigationExtras = {state: {sourceData: 'Italia'}};
      this.router.navigate(['/grafici'], NavigationExtras);
    }
 

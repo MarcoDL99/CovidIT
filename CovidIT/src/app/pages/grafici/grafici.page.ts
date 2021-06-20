@@ -1,17 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PopovermenuPage} from '../../Utilty/popovermenu/popovermenu.page';
 import {PopoverController} from '@ionic/angular';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
-import {GoogleChartInterface} from 'ng2-google-charts';
 import {Grafico, DECESSI, TERAPIE_INTENSIVE, TAMPONI, POSITIVI} from '../../model/grafico.model';
 import {GraficoService} from '../../services/grafico.service';
 import * as HighCharts from 'highcharts';
-import {IonLoaderService} from "../../Utilty/GraphLoaderNotification/ion-loader.service";
-import {waitForAsync} from "@angular/core/testing";
-import {URL_BASE, URL_DATE_FROM, URL_DATE_TO} from "../../constants";
-import {HttpClient} from "@angular/common/http";
-import {resolve} from "chart.js/helpers";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-grafici',
@@ -19,11 +14,11 @@ import {resolve} from "chart.js/helpers";
   styleUrls: ['./grafici.page.scss'],
 })
 export class GraficiPage implements OnInit {
-  private positiviChart = 'positiviChart';
-  private decessiChart = 'decessiChart';
-  private terapieChart = 'terapieChart';
-  private tamponiChart = 'tamponiChart';
-  private charts$ = [this.positiviChart, this.decessiChart, this.terapieChart, this.tamponiChart];
+  private positiviID = 'positiviChart';
+  private decessiID = 'decessiChart';
+  private terapieID = 'terapieChart';
+  private tamponiID = 'tamponiChart';
+  private charts$ = [this.positiviID, this.decessiID, this.terapieID, this.tamponiID];
   private titoli$ = [POSITIVI, DECESSI, TERAPIE_INTENSIVE, TAMPONI];
   // eslint-disable-next-line @typescript-eslint/naming-convention
   private PRIMOGIORNO = '2020-02-24T23:39:03.342+02:00';
@@ -38,14 +33,13 @@ export class GraficiPage implements OnInit {
   private chartTamponi: HighCharts.Chart;
   private charts: HighCharts.Chart[];
   private grafico: Grafico;
-
   constructor(private sanitizer: DomSanitizer,
               private popover: PopoverController,
               private router: Router,
               private route: ActivatedRoute,
               private graficoService: GraficoService,
-              private ionLoaderService: IonLoaderService,
-              private http: HttpClient) {
+              private toastr: ToastrService,
+              ) {
   }
 
   createChart() {
@@ -53,7 +47,7 @@ export class GraficiPage implements OnInit {
     for (let i = 0; i <= 3; i++) {
       this.chartPositivi = HighCharts.chart((this.charts$[i]), {
         chart: {
-          type: 'area',
+          type: 'line',
           backgroundColor: '#FFFFFF',
         },
         plotOptions: {
@@ -63,6 +57,9 @@ export class GraficiPage implements OnInit {
         },
         title: {
           text: ''
+        },
+        tooltip:{
+          pointFormat: '<b>{point.y}</b><br>'
         },
         xAxis: {
           categories: this.grafico.giorni,
@@ -83,12 +80,12 @@ export class GraficiPage implements OnInit {
             enabled: true,
             symbol: 'circle',
             radius: 2,
-            color: '#ff0000',
-            lineColor: '#ff0000',
+            color: '#000000',
+            lineColor: '#000000',
             lineWidth: 3,
           },
           data: this.grafico.dati[i],
-          color: '#ff0000',
+          color: '#000000',
           pointWidth: 8,
           opacity: 1
         }]
@@ -118,15 +115,26 @@ export class GraficiPage implements OnInit {
 
   async doRefresh() {
     await this.getDati();
-    console.log(this.grafico);
     this.createChart();
   }
 
   async getDati(){
-      let grafico=new Grafico();
+    this.showDownloadToast();
       await this.graficoService.getDati(this.sourceType, this.startDate, this.endDate);
-
       this.grafico=this.graficoService.getGrafico();
-
+  }
+  showDownloadToast(): void{
+    if (((Date.parse(this.startDate)) > Date.parse(this.endDate)) && (this.startDate!==this.endDate)) {
+      this.toastr.error("Inserire un intervallo temporale valido.");
+    }
+    else {
+        if (this.startDate && this.endDate) {
+          this.toastr.info("Download in corso");
+        }
+        else {
+          this.toastr.error("Per favore selezionare le date.",'ERRORE');
+        }
+    }
   }
 }
+

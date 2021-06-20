@@ -14,15 +14,16 @@ export class RegionService{
 
   private dato$: Regione;
   private datoVuoto = new Regione();
-  
+
 
     constructor(private http: HttpClient, private territorioService: TerritorioService){}
 
     //Funzione che prende i dati dalle API
+
     loadDati(): any{
       //Trasformo l'Observable ritornato dalla richiesta get in una promise perchè viene fatta una sola volta.
-      let todayDate = this.territorioService.getTodayDate()
-      let dataPromise = this.http.get('https://api.covid19tracking.narrativa.com/api/' + todayDate + '/country/italy').toPromise()
+      let todayDate = this.territorioService.getTodayDate();
+      let dataPromise = this.http.get('https://api.covid19tracking.narrativa.com/api/' + todayDate + '/country/italy').toPromise();
       return dataPromise;
     }
 
@@ -30,12 +31,12 @@ export class RegionService{
 
     //Funzione che restituisce i dati presi dalla loadDati()
     bindDati(nomeRegione: string): any{
-      
 
-      
+
+
       let todayString = this.territorioService.getTodayDate();
 
-      
+
       this.dato$=new Regione();{
         this.loadDati().then(data =>{
           let arrayRegioni = data['dates'][todayString]['countries']['Italy']['regions'];
@@ -58,14 +59,14 @@ export class RegionService{
           this.territorioService.showErrorToast();
         });
       }
-    
+
       return this.dato$;
     }
-    
+
 
     //Funzione che ottiene l'oggetto regione a partire dall'array restituito dalle API
     getOggettoRegione(arrayRegioni: Array<Object>, nomeRegione: string): any{
-      
+
       for (let element of arrayRegioni){
         if (element['name']==nomeRegione){
           return element;

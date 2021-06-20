@@ -6,7 +6,7 @@ export class Grafico{
    giorni: string[] = [];
    dati = [this.positivi,this.decessi,this.terapie,this.tamponi];
 }
-export const POSITIVI = 'Nuovi Casi';
-export const TERAPIE_INTENSIVE= 'Terapie Intensive';
-export const DECESSI= 'Decessi';
-export const TAMPONI= 'Tamponi';
+export const POSITIVI = 'Totale Positivi';
+export const TERAPIE_INTENSIVE= 'Occupazione Terapie Intensive';
+export const DECESSI= 'Totale Decessi';
+export const TAMPONI= 'Tamponi giornalieri';
