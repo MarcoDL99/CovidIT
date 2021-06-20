@@ -8,7 +8,6 @@ export class Regione{
   totale_tamponi: number;
   nuovi_tamponi: number;
   ultimo_aggiornamento: string;
-  province: string[];
 }
 
 export const REGIONI = {

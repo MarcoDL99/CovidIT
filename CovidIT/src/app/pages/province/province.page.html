@@ -4,7 +4,7 @@
     <ion-buttons class="titolo" slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ios" class="titolo"><h1>CovidIT</h1></ion-title>
+    <ion-title class="titolo ion-text-center"><h1>CovidIT</h1></ion-title>
     <ion-buttons class="titolo" slot="end">
       <ion-button (click)="createMenu($event)">
         <ion-icon slot="icon-only" ios="ellipsis-vertical" md="ellipsis-vertical"></ion-icon>
@@ -21,7 +21,7 @@
 
 
   <ion-text color="dark" class="ion-text-center">
-    <h1 id="nomeProvincia">{{provinceId}}</h1>
+    <h1 id="nomeProvincia">{{dato$.nome}}</h1>
   </ion-text>
 
   <ion-text color="dark" class="ion-text-center">

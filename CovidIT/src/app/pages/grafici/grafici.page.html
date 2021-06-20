@@ -3,7 +3,7 @@
     <ion-buttons class="titolo" slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ios" class="titolo"><h1>CovidIT</h1></ion-title>
+    <ion-title class="titolo ion-text-center"><h1>CovidIT</h1></ion-title>
     <ion-buttons class="titolo" slot="end">
       <ion-button (click)="createMenu($event)">
         <ion-icon slot="icon-only" ios="ellipsis-vertical" md="ellipsis-vertical"></ion-icon>
@@ -34,7 +34,7 @@
   </ion-button>
   <div [hidden]="hidden">
     <div class="ion-no-padding" *ngFor="let chart of charts$; index as i"  style="width: 100%; --inner-padding-bottom: 0; --inner-padding-end: 0; --inner-padding-start: 0; --inner-padding-top: 0; margin-inline-end: 0;
-                margin-right: 0; margin-inside: 0; margin-outside: 0;"  >
+                margin-right: 0;"  >
         <span>
     <ion-card class="welcome-card">
       <ion-card-header>

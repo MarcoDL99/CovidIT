@@ -1,5 +1,6 @@
-import {Contatto, ContattoComponent} from '../model/contatto.model';
+import {Contatto} from '../model/contatto.model';
 import {Injectable} from "@angular/core";
+import { ContattoComponent } from '../model/contattoComponent.model';
 import {
   ABRUZZO,  BASILICATA,  CALABRIA,  CAMPANIA,  EMILIA_ROMAGNA,  FRIULI_VENEZIA_GIULIA,  LAZIO,  LIGURIA,  LOMBARDIA,  MARCHE,
   MOLISE,  PIEMONTE,  PROVAUT_BOLZANO,  PROVAUT_TRENTO,  PUGLIA,  SARDEGNA,  SICILIA,  TOSCANA, UMBRIA, VALLE_D_AOSTA, VENETO

@@ -12,7 +12,6 @@ export class Italia implements Territorio{
   totale_tamponi: number;
   nuovi_tamponi: number;
   ultimo_aggiornamento: string;
-  regioni: string[] = NOMI_REGIONI;
 }
 
 

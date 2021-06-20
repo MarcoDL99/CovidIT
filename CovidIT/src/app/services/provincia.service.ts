@@ -35,6 +35,7 @@ export class ProvinciaService{
             this.dato$.totaleContagi = provinciaObj['totale_casi'];
             let dataUltimoAggiornamento = this.getData(provinciaObj['data']);
             this.dato$.ultimoAggiornamento = dataUltimoAggiornamento;
+            this.dato$.nome=nomeProvincia;
         })
         .catch(()=>{
           this.territorioService.showErrorToast();
