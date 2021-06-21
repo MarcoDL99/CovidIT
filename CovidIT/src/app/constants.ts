@@ -1,6 +1,7 @@
 export const USE_PROXY = true;
 
 export const URL_BASE = 'https://api.covid19tracking.narrativa.com/api/country/italy';
+export const URL_REGION = 'https://api.covid19tracking.narrativa.com/api/country/italy/region/'
 
 export const URL_DATE_FROM ='?date_from=';
 export const URL_DATE_TO ='&date_to=';
