@@ -7,7 +7,7 @@ import {FaqService} from '../../services/faq.service';
   styleUrls: ['./faq.page.scss'],
 })
 export class FaqPage implements OnInit {
-  private faqs$: Faq[];
+  public faqs$: Faq[];
   constructor(private faqService: FaqService) { }
 
   ngOnInit() {

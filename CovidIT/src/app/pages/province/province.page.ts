@@ -64,9 +64,9 @@ export class ProvincePage implements OnInit {
     //Cambio del colore della provincia scelta
     let obj: any = document.getElementById("mapRegProvince");
     this.svgDoc = obj.contentDocument;
-    this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#F1B739");
+    this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#0050B9");
 
-    
+
     this.bindClick();
 
   }
@@ -91,8 +91,8 @@ export class ProvincePage implements OnInit {
     this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#9DA3B3");
     this.provinceId = id;
     this.dato$ = this.provinciaService.bindDati(this.provinceId);
-    this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#F1B739");
+    this.svgDoc.getElementById(this.provinceId).setAttribute("style","fill:#0050B9");
   }
-  
+
 }
 

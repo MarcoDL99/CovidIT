@@ -26,7 +26,7 @@ export class GraficoService{
     let end: string = endDate.substring(0,10);
     if (end[9]==='T'){ end=end.slice(0,-1);}
     sito= sito+URL_DATE_FROM+start+URL_DATE_TO+end;
-    
+
     return this.http.get(sito).toPromise();
   }
  //restituisce un array contenente tutte le date nell'intervallo indicato
@@ -89,7 +89,7 @@ export class GraficoService{
       //Se la lunghezza delle date finali è maggiore di 10
       if (endDates.length>10){
         for(let i=0; i<11; i++) {
-          
+
           //pusho le promise nell'array di promise
           promises.push(this.loadDati(nomeTerritorio, startDates[i], endDates[i]));
         }
@@ -101,7 +101,7 @@ export class GraficoService{
           }
           promises=[];
           for(let i=11; i<endDates.length; i++) {
-            
+
             promises.push(this.loadDati(nomeTerritorio, startDates[i], endDates[i]));
           }
           Promise.all(promises).then(data2 => {
@@ -120,7 +120,7 @@ export class GraficoService{
       //Avendo poche richieste da fare, si possono fare tutte insieme
       else{
         for(let i=0; i<endDates.length; i++) {
-          
+
           promises.push(this.loadDati(nomeTerritorio, startDates[i], endDates[i]));
         }
         Promise.all(promises).then(data2 => {
@@ -145,10 +145,14 @@ export class GraficoService{
         //datiObj = data.dates[datestring].countries.Italy.regions[0];
       }
       this.grafico.giorni.push(this.editGiorno(datiPerGiorno['date']));
+      this.grafico.nuoviPositivi.push(Number.parseInt(datiPerGiorno.today_new_confirmed, 10));
       this.grafico.positivi.push(Number.parseInt(datiPerGiorno.today_confirmed, 10));
+      this.grafico.nuoviDecessi.push(Number.parseInt(datiPerGiorno.today_new_deaths, 10));
       this.grafico.decessi.push(Number.parseInt(datiPerGiorno.today_deaths,10));
-      this.grafico.tamponi.push(Number.parseInt(datiPerGiorno.today_tests,10));
+      this.grafico.nuoviTerapie.push(Number.parseInt(datiPerGiorno.today_new_intensive_care, 10));
       this.grafico.terapie.push(Number.parseInt(datiPerGiorno.today_intensive_care,10));
+      this.grafico.tamponi.push(Number.parseInt(datiPerGiorno.today_tests,10));
+
     }
   }
   getGrafico(): Grafico{
